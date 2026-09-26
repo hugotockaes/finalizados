@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Visualizador 360</title>
+<style>
+html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:Arial,sans-serif}
+#viewer{width:100%;height:100%}
+#ui{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;gap:10px;align-items:center;padding:10px 14px;background:rgba(25,25,25,.55);backdrop-filter:blur(8px);border-radius:14px;color:#fff;z-index:10}
+button,label{background:#444;color:#fff;border:0;border-radius:10px;padding:10px 14px;font-size:14px;cursor:pointer}
+input[type=file]{display:none}
+#name{opacity:.85;font-size:13px;max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style>
+</head>
+<body>
+<div id="viewer"></div>
+<div id="ui">
+<label for="file">Escolher imagem 360</label>
+<input id="file" type="file" accept="image/*">
+<button id="reset">Recentralizar</button>
+<span id="name">nenhuma imagem carregada</span>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+let scene, camera, renderer, sphere, lon=0, lat=0, isDown=false, sx=0, sy=0, slon=0, slat=0;
+init(); animate();
+
+function init(){
+  const el=document.getElementById('viewer');
+  scene=new THREE.Scene();
+  camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1100);
+  renderer=new THREE.WebGLRenderer({antialias:true});
+  renderer.setPixelRatio(devicePixelRatio);
+  renderer.setSize(innerWidth,innerHeight);
+  el.appendChild(renderer.domElement);
+
+  const geometry=new THREE.SphereGeometry(500,64,40);
+  geometry.scale(-1,1,1);
+  sphere=new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color:0x111111}));
+  scene.add(sphere);
+
+  renderer.domElement.addEventListener('mousedown',e=>{isDown=true;sx=e.clientX;sy=e.clientY;slon=lon;slat=lat;});
+  addEventListener('mouseup',()=>isDown=false);
+  addEventListener('mousemove',e=>{
+    if(!isDown)return;
+    lon=slon+(sx-e.clientX)*0.15;
+    lat=slat+(e.clientY-sy)*0.15;
+  });
+
+  renderer.domElement.addEventListener('wheel',e=>{
+    camera.fov=THREE.MathUtils.clamp(camera.fov+e.deltaY*0.03,30,100);
+    camera.updateProjectionMatrix();
+  },{passive:true});
+
+  addEventListener('resize',()=>{
+    camera.aspect=innerWidth/innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth,innerHeight);
+  });
+
+  document.getElementById('reset').onclick=()=>{
+    lon=0;lat=0;camera.fov=75;camera.updateProjectionMatrix();
+  };
+
+  document.getElementById('file').addEventListener('change',e=>{
+    const file=e.target.files[0];
+    if(!file)return;
+    const url=URL.createObjectURL(file);
+    new THREE.TextureLoader().load(url,tex=>{
+      tex.colorSpace=THREE.SRGBColorSpace;
+      if(sphere.material.map)sphere.material.map.dispose();
+      sphere.material.map=tex;
+      sphere.material.color.set(0xffffff);
+      sphere.material.needsUpdate=true;
+      document.getElementById('name').textContent=file.name;
+    });
+  });
+}
+
+function animate(){
+  requestAnimationFrame(animate);
+  lat=Math.max(-85,Math.min(85,lat));
+  const phi=THREE.MathUtils.degToRad(90-lat);
+  const theta=THREE.MathUtils.degToRad(lon);
+  const target=new THREE.Vector3(
+    500*Math.sin(phi)*Math.cos(theta),
+    500*Math.cos(phi),
+    500*Math.sin(phi)*Math.sin(theta)
+  );
+  camera.lookAt(target);
+  renderer.render(scene,camera);
+}
+</script>
+</body>
+</html>
