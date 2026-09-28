@@ -1,0 +1,152 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2870
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue-Bold;\f1\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab560
+\pard\pardeftab560\pardirnatural\partightenfactor0
+
+\f0\b\fs40 \cf0 Folha de Ponto\
+\pard\pardeftab560\slleading20\partightenfactor0
+
+\f1\b0\fs26 \cf0 \
+\
+Vou enviar um PDF do \'93Relat\'f3rio de Justificativa de Ponto\'94 do Senac.\
+\
+Analise visualmente e textualmente TODAS as p\'e1ginas do PDF e gere um arquivo XML compat\'edvel com o meu sistema HTML de folha de ponto.\
+\
+IMPORTANTE: n\'e3o reorganize os hor\'e1rios e n\'e3o tente recalcular ou corrigir os dados. O objetivo \'e9 transcrever fielmente o que aparece no PDF.\
+\
+Para CADA DIA do per\'edodo, extraia:\
+\
+1. Data\
+2. Marca\'e7\'f5es registradas no ponto eletr\'f4nico\
+3. 1\'aa Mar\
+4. 2\'aa Mar\
+5. 3\'aa Mar\
+6. 4\'aa Mar\
+7. 5\'aa Mar\
+8. 6\'aa Mar\
+9. 7\'aa Mar\
+10. 8\'aa Mar\
+11. Saldo do dia\
+12. Justificar\
+13. Motivo\
+\
+REGRAS IMPORTANTES\
+\
+\'95 O campo \'93Marca\'e7\'f5es registradas\'94 corresponde SOMENTE aos hor\'e1rios existentes na coluna \'93Marca\'e7\'f5es registradas no ponto eletr\'f4nico\'94 do PDF.\
+\
+\'95 Esses hor\'e1rios devem ser colocados juntos no campo <registradas>, separados por espa\'e7o.\
+\
+Exemplo:\
+<registradas>07:01 12:00 13:30 18:24</registradas>\
+\
+\'95 N\'c3O coloque esses hor\'e1rios nos campos mar1, mar2 etc.\
+\
+\'95 Os campos mar1 at\'e9 mar8 correspondem EXATAMENTE \'e0s colunas \'931\'aa Mar\'94 at\'e9 \'938\'aa Mar\'94 da \'e1rea:\
+\'93Complemente eventuais omiss\'f5es no registro e/ou indica\'e7\'e3o de marca\'e7\'f5es indevidas\'94.\
+\
+\'95 Preserve a POSI\'c7\'c3O ORIGINAL da marca\'e7\'e3o.\
+\
+Exemplo:\
+Se no PDF aparecer:\
+1\'aa Mar = vazio\
+2\'aa Mar = 12:00\
+3\'aa Mar = 12:30\
+4\'aa Mar = 17:30\
+\
+o XML deve conter:\
+\
+<mar1></mar1>\
+<mar2>12:00</mar2>\
+<mar3>12:30</mar3>\
+<mar4>17:30</mar4>\
+\
+N\'c3O desloque os hor\'e1rios para preencher espa\'e7os vazios.\
+\
+\'95 Copie o saldo exatamente como aparece no PDF, incluindo valores negativos.\
+\
+Exemplos:\
+<saldo>1:42</saldo>\
+<saldo>-8:00</saldo>\
+<saldo>0:00</saldo>\
+\
+\'95 O campo <justificar> deve reproduzir exatamente a classifica\'e7\'e3o apresentada:\
+Cr\'e9dito\
+D\'e9bito\
+Falta\
+\'cdmpar\
+ou vazio.\
+\
+\'95 O campo <motivo> deve reproduzir o texto apresentado no PDF, como:\
+Banco de horas.\
+Falta de marca\'e7\'e3o / Banco de horas.\
+Compensa\'e7\'e3o de horas.\
+FERIADO - CORPUS CHRISTI\
+etc.\
+\
+\'95 Dias sem marca\'e7\'f5es tamb\'e9m DEVEM aparecer no XML.\
+\
+\'95 N\'e3o ignore s\'e1bados, domingos, feriados, compensa\'e7\'f5es ou dias vazios.\
+\
+\'95 Gere um <registro> para cada dia existente no per\'edodo do relat\'f3rio.\
+\
+FORMATO OBRIGAT\'d3RIO DO XML:\
+\
+<?xml version="1.0" encoding="UTF-8"?>\
+<folhaPonto>\
+\
+  <registro numero="1">\
+    <dataOriginal>01/06/2026</dataOriginal>\
+    <registradas>07:01 12:43</registradas>\
+    <mar1></mar1>\
+    <mar2></mar2>\
+    <mar3></mar3>\
+    <mar4></mar4>\
+    <mar5></mar5>\
+    <mar6></mar6>\
+    <mar7></mar7>\
+    <mar8></mar8>\
+    <saldo>1:42</saldo>\
+    <justificar>Cr\'e9dito</justificar>\
+    <motivo>Banco de horas.</motivo>\
+  </registro>\
+\
+</folhaPonto>\
+\
+A ordem obrigat\'f3ria dos campos \'e9:\
+\
+dataOriginal\
+registradas\
+mar1\
+mar2\
+mar3\
+mar4\
+mar5\
+mar6\
+mar7\
+mar8\
+saldo\
+justificar\
+motivo\
+\
+ANTES DE GERAR O ARQUIVO:\
+\
+Fa\'e7a uma segunda confer\'eancia comparando o XML com as tabelas do PDF, principalmente:\
+\
+\'95 hor\'e1rios registrados;\
+\'95 posi\'e7\'e3o correta de mar1 a mar8;\
+\'95 saldos negativos;\
+\'95 Cr\'e9dito, D\'e9bito, Falta e \'cdmpar;\
+\'95 motivos;\
+\'95 feriados e compensa\'e7\'f5es;\
+\'95 quantidade total de dias.\
+\
+N\'e3o invente informa\'e7\'f5es ausentes.\
+N\'e3o calcule novos saldos.\
+N\'e3o transforme marca\'e7\'f5es registradas em marca\'e7\'f5es complementares.\
+N\'e3o compacte as colunas mar1\'96mar8.\
+N\'e3o altere a reda\'e7\'e3o dos motivos.\
+\
+Depois da confer\'eancia, gere o arquivo .XML pronto para download e para ser carregado diretamente pelo bot\'e3o \'93Carregar XML\'94 do meu HTML.}
