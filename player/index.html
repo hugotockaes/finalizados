@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Player de vídeo</title>
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#11131a;color:#f5f6fa}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px}
+    main{width:min(100%,1050px)}header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+    h1{font-size:clamp(1.4rem,3vw,2rem);margin:0}.button{border:0;border-radius:12px;background:#7d5cff;color:white;padding:13px 20px;font:inherit;font-weight:700;cursor:pointer}.button:hover{background:#947aff}.button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+    .stage{aspect-ratio:16/9;background:#050609;border:1px solid #313543;border-radius:16px;overflow:hidden;display:grid;place-items:center;position:relative}
+    video{width:100%;height:100%;object-fit:contain;display:none}.stage.loaded video{display:block}.stage.loaded .placeholder{display:none}
+    .placeholder{text-align:center;padding:24px;color:#b7bac9}.placeholder strong{display:block;color:#fff;font-size:1.15rem;margin-bottom:8px}
+    .meta{min-height:26px;margin:14px 2px;color:#b7bac9;overflow-wrap:anywhere}footer{color:#737789;text-align:center;font-size:.75rem;margin-top:24px}
+    .tools{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0}.button.secondary{background:#303747}.button.secondary:hover{background:#45506a}.button:disabled{opacity:.5;cursor:not-allowed}.hint{color:#a9adba;font-size:.9rem}
+    .timeline{height:28px;position:relative;cursor:pointer;display:flex;align-items:center;touch-action:none}.track{position:relative;width:100%;height:8px;background:#34394a;border-radius:20px}.progress{height:100%;width:0;background:#7d5cff;border-radius:20px;pointer-events:none}.marker{position:absolute;top:50%;width:14px;height:14px;transform:translate(-50%,-50%);border:2px solid #fff;border-radius:50%;background:#ffb84d;cursor:pointer;padding:0;box-shadow:0 0 0 2px #1c1f29}.marker:hover,.marker:focus-visible{width:18px;height:18px;outline:2px solid #ffb84d;outline-offset:3px}.times{display:flex;justify-content:space-between;color:#a9adba;font-variant-numeric:tabular-nums;font-size:.85rem}.markers{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.marker-item{background:#242938;border:1px solid #444b60;color:#fff;border-radius:9px;padding:8px 11px;cursor:pointer;font:inherit}.marker-item:hover{border-color:#ffb84d}
+    .scrim{position:fixed;inset:0;background:#0009;z-index:9}.details{position:fixed;right:0;top:0;bottom:0;width:min(480px,100vw);background:#191d29;border-left:1px solid #3b4254;box-shadow:-12px 0 32px #0006;z-index:10;padding:24px;overflow:auto}.details[hidden],.scrim[hidden]{display:none}.details-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.details-head h2{margin:0}.close{background:none;border:0;color:white;font-size:2rem;cursor:pointer}.detail-card{background:#242938;border:1px solid #3b4254;border-radius:14px;padding:16px;margin:16px 0}.detail-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.detail-top h3{margin:0;font-size:1rem}.detail-top button{background:#3c4560;color:white;border:0;border-radius:7px;padding:7px 9px;cursor:pointer}.detail-card label{display:block;color:#c7cad5;font-size:.88rem;margin-top:12px}.detail-card input,.detail-card textarea{width:100%;margin-top:5px;background:#11151f;border:1px solid #4b5368;border-radius:8px;color:white;padding:10px;font:inherit}.detail-card textarea{min-height:72px;resize:vertical}.detail-card input:focus,.detail-card textarea:focus{outline:2px solid #7d5cff}.empty-details{color:#a9adba}
+    .caption-overlay{position:absolute;bottom:8%;left:8%;right:8%;text-align:center;color:white;font-size:clamp(16px,2.7vw,32px);font-weight:700;line-height:1.35;white-space:pre-wrap;overflow-wrap:anywhere;text-shadow:0 2px 5px #000,0 0 12px #000;pointer-events:none}.caption-overlay:empty{display:none}
+  </style>
+</head>
+<body>
+  <main>
+    <header><h1>Player de vídeo</h1><button class="button" id="open" type="button">Abrir vídeo</button></header>
+    <input id="file" type="file" accept="video/*,.mp4,.webm,.ogv,.mov,.m4v" hidden><input id="xml-file" type="file" accept=".xml,application/xml,text/xml" hidden>
+    <div class="stage" id="stage">
+      <div class="placeholder"><strong>Seu vídeo aparece aqui</strong>Escolha um arquivo no botão “Abrir vídeo”.</div>
+      <video id="video" controls playsinline preload="metadata" aria-label="Vídeo selecionado"></video>
+      <div class="caption-overlay" id="caption-overlay" aria-live="off"></div>
+    </div>
+    <p class="meta" id="meta" aria-live="polite">Nenhum vídeo aberto.</p>
+    <div class="tools"><button class="button secondary" id="add-marker" type="button" disabled>+ Adicionar marcador</button><button class="button secondary" id="export-images" type="button" disabled>Exportar imagens</button><button class="button secondary" id="save-xml" type="button" disabled>Salvar XML</button><button class="button secondary" id="load-xml" type="button">Carregar XML</button><button class="button secondary" id="detail" type="button">Detalhar</button><button class="button secondary" id="export-srt" type="button" disabled>Exportar SRT</button><button class="button secondary" id="apply-captions" type="button" disabled aria-pressed="false">Aplicar legenda</button><button class="button secondary" id="export-video" type="button" disabled>Exportar WebM</button><button class="button secondary" id="export-mp4" type="button" disabled>Exportar MP4</button><span class="hint">M: marcador · Espaço: play/pause</span></div>
+    <p class="hint" id="status" role="status" aria-live="polite"></p>
+    <div class="timeline" id="timeline" role="slider" tabindex="0" aria-label="Linha do tempo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track" id="track"><div class="progress" id="progress"></div></div></div>
+    <div class="times"><span id="elapsed">00:00</span><span id="duration">00:00</span></div>
+    <div class="markers" id="markers" aria-label="Marcadores do vídeo"></div>
+    <footer>Desenvolvido por Hugo Duarte Tockaes</footer>
+  </main>
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="details" id="details" aria-label="Detalhes dos marcadores" hidden>
+    <div class="details-head"><h2>Detalhar marcadores</h2><button class="close" id="close-details" type="button" aria-label="Fechar painel">×</button></div>
+    <p class="hint">Escreva a legenda de cada marcador. O texto será guardado no XML e poderá ser exportado como SRT.</p>
+    <div id="detail-list"></div>
+    <button class="button" id="save-details" type="button" disabled>Salvar detalhes (XML)</button>
+  </aside>
+  <script>
+    const openButton = document.querySelector('#open');
+    const fileInput = document.querySelector('#file');
+    const xmlInput = document.querySelector('#xml-file');
+    const video = document.querySelector('#video');
+    const stage = document.querySelector('#stage');
+    const meta = document.querySelector('#meta');
+    const addMarkerButton = document.querySelector('#add-marker');
+    const exportImagesButton = document.querySelector('#export-images');
+    const saveXmlButton = document.querySelector('#save-xml');
+    const loadXmlButton = document.querySelector('#load-xml');
+    const detailButton = document.querySelector('#detail');
+    const exportSrtButton = document.querySelector('#export-srt');
+    const applyCaptionsButton = document.querySelector('#apply-captions');
+    const exportVideoButton = document.querySelector('#export-video');
+    const exportMp4Button = document.querySelector('#export-mp4');
+    const saveDetailsButton = document.querySelector('#save-details');
+    const captionOverlay = document.querySelector('#caption-overlay');
+    const detailPanel = document.querySelector('#details');
+    const detailList = document.querySelector('#detail-list');
+    const scrim = document.querySelector('#scrim');
+    const closeDetailsButton = document.querySelector('#close-details');
+    const status = document.querySelector('#status');
+    const timeline = document.querySelector('#timeline');
+    const track = document.querySelector('#track');
+    const progress = document.querySelector('#progress');
+    const markerList = document.querySelector('#markers');
+    const elapsed = document.querySelector('#elapsed');
+    const durationLabel = document.querySelector('#duration');
+    let currentURL = null;
+    let markers = [];
+    let busy = false;
+    let videoName = '';
+    let captionsEnabled = false;
+    let audioContext, audioDestination;
+    const hasCaptions = () => markers.some(marker => marker.caption.trim());
+    const mp4Mime = window.MediaRecorder && ['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4'].find(type=>MediaRecorder.isTypeSupported(type));
+    if(!mp4Mime) exportMp4Button.title='A gravação MP4 não é suportada neste navegador. Use Exportar WebM.';
+    const updateExportButtons = () => {
+      openButton.disabled = loadXmlButton.disabled = busy;
+      exportImagesButton.disabled = busy || !markers.length || !video.currentSrc || !Number.isFinite(video.duration);
+      saveXmlButton.disabled = busy || !markers.length;
+      exportSrtButton.disabled = busy || !hasCaptions();
+      applyCaptionsButton.disabled = busy || !video.currentSrc || !hasCaptions();
+      exportVideoButton.disabled = busy || !video.currentSrc || !hasCaptions() || !Number.isFinite(video.duration);
+      exportMp4Button.disabled = !mp4Mime || exportVideoButton.disabled;
+      saveDetailsButton.disabled = busy || !markers.length;
+      addMarkerButton.disabled = busy || !Number.isFinite(video.duration) || video.duration <= 0;
+    };
+    function download(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url; link.download = filename;
+      document.body.append(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+    }
+    const baseName = () => (videoName.replace(/\.[^.]+$/, '').replace(/[^\p{L}\p{N}_-]+/gu, '_').slice(0, 80) || 'video');
+    const escapeXml = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[char]));
+    const formatTime = seconds => {
+      if (!Number.isFinite(seconds)) return '00:00';
+      const total = Math.floor(Math.max(0, seconds));
+      const parts = [Math.floor(total / 3600), Math.floor(total % 3600 / 60), total % 60];
+      return (parts[0] ? parts : parts.slice(1)).map(n => String(n).padStart(2, '0')).join(':');
+    };
+    function captionAt(time) {
+      for(let i=markers.length-1;i>=0;i--) {
+        const marker=markers[i];
+        if(time>=marker.time) {
+          const end=markers[i+1]?.time ?? Math.min(marker.time+3,Number.isFinite(video.duration)?video.duration:Infinity);
+          return time<end ? marker.caption.trim() : '';
+        }
+      }
+      return '';
+    }
+    function updateCaption() { captionOverlay.textContent=captionsEnabled ? captionAt(video.currentTime) : ''; }
+    applyCaptionsButton.addEventListener('click',()=>{
+      captionsEnabled=!captionsEnabled;
+      applyCaptionsButton.setAttribute('aria-pressed',String(captionsEnabled));
+      applyCaptionsButton.textContent=captionsEnabled?'Ocultar legenda':'Aplicar legenda';
+      updateCaption();
+    });
+    function updateTimeline() {
+      const length = Number.isFinite(video.duration) ? video.duration : 0;
+      const ratio = length ? Math.min(1, video.currentTime / length) : 0;
+      progress.style.width = `${ratio * 100}%`;
+      elapsed.textContent = formatTime(video.currentTime);
+      durationLabel.textContent = formatTime(length);
+      timeline.setAttribute('aria-valuenow', String(Math.round(ratio * 100)));
+      timeline.setAttribute('aria-valuetext', `${formatTime(video.currentTime)} de ${formatTime(length)}`);
+      updateCaption();
+    }
+    function renderMarkers() {
+      track.querySelectorAll('.marker').forEach(node => node.remove());
+      markerList.replaceChildren();
+      markers.forEach((marker, index) => {
+        const time = marker.time;
+        const jump = () => { if (video.currentSrc) { video.currentTime = time; updateTimeline(); } };
+        const dot = document.createElement('button');
+        dot.type = 'button'; dot.className = 'marker';
+        dot.style.left = `${video.duration ? Math.max(0,Math.min(100,time / video.duration * 100)) : 0}%`;
+        dot.title = `Marcador ${index + 1} — ${formatTime(time)}`;
+        dot.setAttribute('aria-label', dot.title);
+        dot.addEventListener('click', event => { event.stopPropagation(); jump(); });
+        track.append(dot);
+        const item = document.createElement('button');
+        item.type = 'button'; item.className = 'marker-item';
+        item.textContent = `${index + 1}. ${formatTime(time)}`;
+        item.addEventListener('click', jump);
+        markerList.append(item);
+      });
+      if (!detailPanel.hidden) renderDetails();
+      updateCaption();
+    }
+    function renderDetails() {
+      detailList.replaceChildren();
+      if (!markers.length) { const empty = document.createElement('p'); empty.className='empty-details'; empty.textContent='Adicione marcadores ou carregue um XML para começar.'; detailList.append(empty); return; }
+      markers.forEach((marker, index) => {
+        const card = document.createElement('section'); card.className = 'detail-card';
+        const top = document.createElement('div'); top.className = 'detail-top';
+        const heading = document.createElement('h3'); heading.textContent = `Marcador ${index+1} · ${formatTime(marker.time)}`;
+        const jump = document.createElement('button'); jump.type='button'; jump.textContent='Ir ao tempo'; jump.disabled=!video.currentSrc;
+        jump.addEventListener('click',()=>{ video.currentTime=marker.time; updateTimeline(); });
+        top.append(heading,jump); card.append(top);
+        const wrapper=document.createElement('label'); wrapper.textContent='Legenda';
+        const control=document.createElement('textarea');
+        control.value=marker.caption; control.placeholder='Texto que aparece neste momento do vídeo';
+        control.addEventListener('input',()=>{ marker.caption=control.value; updateExportButtons(); updateCaption(); });
+        wrapper.append(control); card.append(wrapper);
+        detailList.append(card);
+      });
+    }
+    const openDetails = () => { detailPanel.hidden = scrim.hidden = false; renderDetails(); closeDetailsButton.focus(); };
+    const closeDetails = () => { detailPanel.hidden = scrim.hidden = true; detailButton.focus(); };
+    detailButton.addEventListener('click',openDetails);
+    closeDetailsButton.addEventListener('click',closeDetails);
+    scrim.addEventListener('click',closeDetails);
+    saveDetailsButton.addEventListener('click',()=>{ saveXmlButton.click(); closeDetails(); });
+    document.addEventListener('keydown',event=>{ if(event.key==='Escape' && !detailPanel.hidden) closeDetails(); });
+    function addMarker() {
+      if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+      markers.push({time:video.currentTime,caption:''});
+      markers.sort((a, b) => a.time - b.time);
+      renderMarkers();
+      updateExportButtons();
+    }
+    saveXmlButton.addEventListener('click', () => {
+      if (!markers.length) return;
+      const rows = markers.map((marker, index) => `    <marcador id="${index + 1}" tempo="${marker.time.toFixed(3)}" horario="${formatTime(marker.time)}" imagem="marcador_${String(index + 1).padStart(3, '0')}.png">\n      <legenda>${escapeXml(marker.caption)}</legenda>\n    </marcador>`);
+      const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<projeto versao="1.0">\n  <video nome="${escapeXml(videoName)}" duracao="${Number.isFinite(video.duration) ? video.duration.toFixed(3) : ''}" />\n  <marcadores>\n${rows.join('\n')}\n  </marcadores>\n</projeto>\n`;
+      download(new Blob([xml], {type:'application/xml;charset=utf-8'}), `${baseName()}_marcadores.xml`);
+      status.textContent = `XML salvo com ${markers.length} marcador(es).`;
+    });
+    const srtTime = seconds => {
+      const ms=Math.round(Math.max(0,seconds)*1000);
+      const hours=Math.floor(ms/3600000), minutes=Math.floor(ms%3600000/60000), secs=Math.floor(ms%60000/1000), millis=ms%1000;
+      return `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(secs).padStart(2,'0')},${String(millis).padStart(3,'0')}`;
+    };
+    exportSrtButton.addEventListener('click',()=>{
+      const blocks=[];
+      const length=Number.isFinite(video.duration)?video.duration:Infinity;
+      markers.forEach((marker,index)=>{
+        const caption=marker.caption.trim().replace(/\r\n?/g,'\n');
+        if(!caption) return;
+        const next=markers[index+1]?.time;
+        const end=Math.min(next??marker.time+3,length);
+        if(end<=marker.time) return;
+        blocks.push(`${blocks.length+1}\n${srtTime(marker.time)} --> ${srtTime(end)}\n${caption}`);
+      });
+      if(!blocks.length) { status.textContent='Não há legendas com duração válida para exportar.'; return; }
+      download(new Blob([blocks.join('\n\n')+'\n'],{type:'text/plain;charset=utf-8'}),`${baseName()}_legendas.srt`);
+      status.textContent=`SRT exportado com ${blocks.length} legenda(s).`;
+    });
+    function drawCaption(context,canvas,text) {
+      if(!text) return;
+      const size=Math.max(22,Math.round(canvas.height*.042));
+      context.save(); context.font=`700 ${size}px system-ui, sans-serif`;
+      context.textAlign='center'; context.textBaseline='middle';
+      context.lineJoin='round'; context.lineWidth=Math.max(4,size*.17);
+      const maxWidth=canvas.width*.84, lines=[];
+      for(const paragraph of text.split('\n')) {
+        let line='';
+        for(const word of paragraph.split(/\s+/)) {
+          const candidate=line?`${line} ${word}`:word;
+          if(line && context.measureText(candidate).width>maxWidth) { lines.push(line); line=word; } else line=candidate;
+        }
+        lines.push(line);
+      }
+      const lineHeight=size*1.32, firstY=canvas.height*.87-(lines.length-1)*lineHeight;
+      lines.forEach((line,i)=>{
+        const y=firstY+i*lineHeight;
+        context.strokeStyle='rgba(0,0,0,.9)'; context.strokeText(line,canvas.width/2,y,maxWidth);
+        context.fillStyle='#fff'; context.fillText(line,canvas.width/2,y,maxWidth);
+      });
+      context.restore();
+    }
+    async function exportCaptionedVideo(format) {
+      if(busy || !video.currentSrc || !hasCaptions()) return;
+      if(!window.MediaRecorder || !HTMLCanvasElement.prototype.captureStream) { status.textContent='Este navegador não permite exportar vídeo. Experimente Chrome ou Edge.'; return; }
+      const mime=format==='mp4' ? mp4Mime : ['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(type=>MediaRecorder.isTypeSupported(type));
+      if(!mime) { status.textContent=`Este navegador não oferece gravação ${format.toUpperCase()}.`; return; }
+      busy=true; updateExportButtons();
+      const originalTime=video.currentTime, wasPlaying=!video.paused;
+      let recorder, stream, frameId;
+      try {
+        video.pause(); await seekTo(0);
+        const canvas=document.createElement('canvas'); canvas.width=video.videoWidth; canvas.height=video.videoHeight;
+        if(!canvas.width || !canvas.height) throw new Error('O vídeo ainda não está pronto para exportar.');
+        const context=canvas.getContext('2d');
+        const paint=()=>{ context.fillStyle='#000'; context.fillRect(0,0,canvas.width,canvas.height); context.drawImage(video,0,0,canvas.width,canvas.height); drawCaption(context,canvas,captionAt(video.currentTime)); frameId=requestAnimationFrame(paint); };
+        paint(); stream=canvas.captureStream(30);
+        try {
+          const AudioCtx=window.AudioContext||window.webkitAudioContext;
+          if(AudioCtx) {
+            if(!audioContext) {
+              audioContext=new AudioCtx(); const source=audioContext.createMediaElementSource(video);
+              audioDestination=audioContext.createMediaStreamDestination();
+              source.connect(audioContext.destination); source.connect(audioDestination);
+            }
+            await audioContext.resume();
+            for(const track of audioDestination.stream.getAudioTracks()) stream.addTrack(track);
+          }
+        } catch(error) { status.textContent='Áudio indisponível; exportando apenas vídeo e legendas.'; }
+        const chunks=[];
+        recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:5000000});
+        const finished=new Promise((resolve,reject)=>{
+          recorder.ondataavailable=event=>{ if(event.data.size) chunks.push(event.data); };
+          recorder.onerror=event=>reject(event.error||new Error('Falha na gravação.'));
+          recorder.onstop=()=>resolve();
+        });
+        const ended=new Promise((resolve,reject)=>{
+          video.addEventListener('ended',resolve,{once:true});
+          video.addEventListener('error',()=>reject(new Error('Erro na reprodução do vídeo.')),{once:true});
+        });
+        video.controls=false;
+        recorder.start(1000);
+        await video.play();
+        status.textContent='Exportando vídeo em tempo real… mantenha esta aba aberta.';
+        await ended;
+        recorder.stop(); await finished;
+        if(!chunks.length) throw new Error('Nenhum quadro foi gravado.');
+        const actualType=recorder.mimeType || mime;
+        const extension=actualType.startsWith('video/mp4')?'mp4':'webm';
+        download(new Blob(chunks,{type:actualType}),`${baseName()}_legendado.${extension}`);
+        status.textContent=`Vídeo legendado exportado em ${extension.toUpperCase()}.`;
+      } catch(error) { status.textContent=`Erro na exportação do vídeo: ${error.message}`; }
+      finally {
+        if(recorder && recorder.state!=='inactive') recorder.stop();
+        if(frameId) cancelAnimationFrame(frameId);
+        if(stream) stream.getVideoTracks().forEach(track=>track.stop());
+        video.controls=true;
+        try { await seekTo(originalTime); if(wasPlaying) await video.play(); } catch(_) {}
+        busy=false; updateExportButtons();
+      }
+    }
+    exportVideoButton.addEventListener('click',()=>exportCaptionedVideo('webm'));
+    exportMp4Button.addEventListener('click',()=>exportCaptionedVideo('mp4'));
+    loadXmlButton.addEventListener('click',()=>xmlInput.click());
+    xmlInput.addEventListener('change',async()=>{
+      const file=xmlInput.files?.[0]; if(!file) return;
+      try {
+        const doc=new DOMParser().parseFromString(await file.text(),'application/xml');
+        if(doc.querySelector('parsererror') || doc.documentElement.tagName!=='projeto') throw new Error('XML inválido.');
+        const videoNode=doc.querySelector('video');
+        const parsed=[...doc.querySelectorAll('marcadores > marcador')].map(node=>({
+          time:node.hasAttribute('tempo')?Number(node.getAttribute('tempo')):NaN,
+          caption:node.querySelector('legenda')?.textContent || node.querySelector('titulo')?.textContent || node.querySelector('instrucao')?.textContent || ''
+        }));
+        if(!parsed.length || parsed.some(item=>!Number.isFinite(item.time)||item.time<0)) throw new Error('Nenhum marcador válido encontrado.');
+        const expectedName=videoNode?.getAttribute('nome')??'';
+        if(video.currentSrc && expectedName && videoName!==expectedName && !confirm(`O XML foi criado para “${expectedName}”. Carregar os marcadores no vídeo “${videoName}” mesmo assim?`)) return;
+        markers=parsed.sort((a,b)=>a.time-b.time);
+        if(!video.currentSrc) videoName=expectedName;
+        renderMarkers(); updateExportButtons();
+        status.textContent=`${markers.length} marcador(es) carregado(s).${!video.currentSrc?' Abra o vídeo para navegar e exportar imagens.':''}`;
+      } catch(error) { status.textContent=`Erro ao carregar XML: ${error.message}`; }
+      finally { xmlInput.value=''; }
+    });
+    // ZIP sem compactação, gerado no próprio navegador para entregar todas as imagens em um download.
+    const encoder = new TextEncoder();
+    const crcTable = Array.from({length:256}, (_,n) => { for(let i=0;i<8;i++) n = n&1 ? 0xedb88320^(n>>>1) : n>>>1; return n>>>0; });
+    function crc32(bytes) { let crc = 0xffffffff; for(const byte of bytes) crc = crcTable[(crc^byte)&255]^(crc>>>8); return (crc^0xffffffff)>>>0; }
+    function makeZip(files) {
+      const local = [], central = []; let offset = 0;
+      for (const {name, bytes} of files) {
+        const label = encoder.encode(name), crc = crc32(bytes);
+        const header = new Uint8Array(30 + label.length), h = new DataView(header.buffer);
+        h.setUint32(0,0x04034b50,true); h.setUint16(4,20,true); h.setUint16(6,0x0800,true);
+        h.setUint32(14,crc,true); h.setUint32(18,bytes.length,true); h.setUint32(22,bytes.length,true);
+        h.setUint16(26,label.length,true); header.set(label,30);
+        local.push(header,bytes);
+        const dir = new Uint8Array(46 + label.length), d = new DataView(dir.buffer);
+        d.setUint32(0,0x02014b50,true); d.setUint16(4,20,true); d.setUint16(6,20,true);
+        d.setUint16(8,0x0800,true); d.setUint32(16,crc,true);
+        d.setUint32(20,bytes.length,true); d.setUint32(24,bytes.length,true);
+        d.setUint16(28,label.length,true); d.setUint32(42,offset,true); dir.set(label,46);
+        central.push(dir); offset += header.length + bytes.length;
+      }
+      const end = new Uint8Array(22), e = new DataView(end.buffer);
+      e.setUint32(0,0x06054b50,true); e.setUint16(8,files.length,true); e.setUint16(10,files.length,true);
+      e.setUint32(12,central.reduce((sum,entry)=>sum+entry.length,0),true); e.setUint32(16,offset,true);
+      return new Blob([...local,...central,end],{type:'application/zip'});
+    }
+    function seekTo(seconds) {
+      return new Promise((resolve,reject) => {
+        if (Math.abs(video.currentTime - seconds) < .001 && video.readyState >= 2) { resolve(); return; }
+        const timer = setTimeout(() => { cleanup(); reject(new Error('Tempo esgotado ao buscar quadro.')); }, 15000);
+        const cleanup = () => { clearTimeout(timer); video.removeEventListener('seeked', done); video.removeEventListener('error', fail); };
+        const done = () => { cleanup(); resolve(); };
+        const fail = () => { cleanup(); reject(new Error('Não foi possível ler o vídeo.')); };
+        video.addEventListener('seeked',done,{once:true}); video.addEventListener('error',fail,{once:true});
+        video.currentTime = seconds;
+      });
+    }
+    exportImagesButton.addEventListener('click', async () => {
+      if (!markers.length || busy) return;
+      busy = true; updateExportButtons();
+      const wasPlaying = !video.paused, originalTime = video.currentTime;
+      video.pause();
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+        if (!canvas.width || !canvas.height) throw new Error('O vídeo ainda não está pronto para capturar imagens.');
+        const context = canvas.getContext('2d');
+        const files = [];
+        for (let i=0; i<markers.length; i++) {
+          status.textContent = `Capturando imagem ${i+1} de ${markers.length}…`;
+          await seekTo(markers[i].time);
+          context.drawImage(video,0,0,canvas.width,canvas.height);
+          const blob = await new Promise(resolve => canvas.toBlob(resolve,'image/png'));
+          if (!blob) throw new Error('Falha ao criar imagem PNG.');
+          files.push({name:`marcador_${String(i+1).padStart(3,'0')}.png`,bytes:new Uint8Array(await blob.arrayBuffer())});
+        }
+        download(makeZip(files),`${baseName()}_imagens.zip`);
+        status.textContent = `${files.length} imagem(ns) exportada(s) em ZIP.`;
+      } catch (error) { status.textContent = `Erro na exportação: ${error.message}`; }
+      finally {
+        try { await seekTo(originalTime); if (wasPlaying) await video.play(); } catch (_) { /* preserva o resultado da exportação */ }
+        busy = false; updateExportButtons();
+      }
+    });
+    openButton.addEventListener('click', () => fileInput.click());
+    addMarkerButton.addEventListener('click', addMarker);
+    document.addEventListener('keydown', event => {
+      if (event.altKey || event.ctrlKey || event.metaKey || event.repeat) return;
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) || document.activeElement.isContentEditable || !detailPanel.hidden) return;
+      if (event.code === 'Space' && video.currentSrc && !busy) {
+        event.preventDefault();
+        if (video.paused) video.play().catch(() => {}); else video.pause();
+      } else if (event.key.toLowerCase() === 'm' && !addMarkerButton.disabled) { event.preventDefault(); addMarker(); }
+    });
+    timeline.addEventListener('click', event => {
+      if (!Number.isFinite(video.duration) || !video.duration) return;
+      const rect = track.getBoundingClientRect();
+      video.currentTime = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width)) * video.duration;
+    });
+    timeline.addEventListener('keydown', event => {
+      if (!Number.isFinite(video.duration) || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      event.preventDefault();
+      video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + (event.key === 'ArrowRight' ? 5 : -5)));
+    });
+    video.addEventListener('timeupdate', updateTimeline);
+    video.addEventListener('loadedmetadata', () => { updateExportButtons(); renderMarkers(); updateTimeline(); });
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files?.[0];
+      if (!file) return;
+      const keepMarkers = !video.currentSrc && markers.length > 0 && videoName === file.name;
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+      if (currentURL) URL.revokeObjectURL(currentURL);
+      if (!keepMarkers) markers = [];
+      videoName = file.name;
+      captionsEnabled=false; captionOverlay.textContent='';
+      applyCaptionsButton.textContent='Aplicar legenda'; applyCaptionsButton.setAttribute('aria-pressed','false');
+      markerList.replaceChildren();
+      track.querySelectorAll('.marker').forEach(node => node.remove());
+      addMarkerButton.disabled = true;
+      exportImagesButton.disabled = true;
+      saveXmlButton.disabled = !markers.length;
+      exportSrtButton.disabled = !markers.some(marker=>marker.caption.trim());
+      applyCaptionsButton.disabled = exportVideoButton.disabled = true;
+      exportMp4Button.disabled = saveDetailsButton.disabled = true;
+      status.textContent = '';
+      progress.style.width = '0%';
+      elapsed.textContent = durationLabel.textContent = '00:00';
+      currentURL = URL.createObjectURL(file);
+      video.src = currentURL;
+      stage.classList.add('loaded');
+      meta.textContent = file.name;
+      fileInput.value = '';
+    });
+    video.addEventListener('error', () => {
+      if (video.currentSrc) meta.textContent = 'Não foi possível reproduzir este arquivo. Tente MP4 (H.264) ou WebM.';
+    });
+    window.addEventListener('pagehide', () => { if (currentURL) URL.revokeObjectURL(currentURL); });
+  </script>
+</body>
+</html>
