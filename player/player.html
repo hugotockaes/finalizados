@@ -17,6 +17,56 @@
     .timeline{height:28px;position:relative;cursor:pointer;display:flex;align-items:center;touch-action:none}.track{position:relative;width:100%;height:8px;background:#34394a;border-radius:20px}.progress{height:100%;width:0;background:#7d5cff;border-radius:20px;pointer-events:none}.marker{position:absolute;top:50%;width:14px;height:14px;transform:translate(-50%,-50%);border:2px solid #fff;border-radius:50%;background:#ffb84d;cursor:pointer;padding:0;box-shadow:0 0 0 2px #1c1f29}.marker:hover,.marker:focus-visible{width:18px;height:18px;outline:2px solid #ffb84d;outline-offset:3px}.times{display:flex;justify-content:space-between;color:#a9adba;font-variant-numeric:tabular-nums;font-size:.85rem}.markers{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.marker-item{background:#242938;border:1px solid #444b60;color:#fff;border-radius:9px;padding:8px 11px;cursor:pointer;font:inherit}.marker-item:hover{border-color:#ffb84d}
     .scrim{position:fixed;inset:0;background:#0009;z-index:9}.details{position:fixed;right:0;top:0;bottom:0;width:min(480px,100vw);background:#191d29;border-left:1px solid #3b4254;box-shadow:-12px 0 32px #0006;z-index:10;padding:24px;overflow:auto}.details[hidden],.scrim[hidden]{display:none}.details-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.details-head h2{margin:0}.close{background:none;border:0;color:white;font-size:2rem;cursor:pointer}.detail-card{background:#242938;border:1px solid #3b4254;border-radius:14px;padding:16px;margin:16px 0}.detail-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.detail-top h3{margin:0;font-size:1rem}.detail-top button{background:#3c4560;color:white;border:0;border-radius:7px;padding:7px 9px;cursor:pointer}.detail-card label{display:block;color:#c7cad5;font-size:.88rem;margin-top:12px}.detail-card input,.detail-card textarea{width:100%;margin-top:5px;background:#11151f;border:1px solid #4b5368;border-radius:8px;color:white;padding:10px;font:inherit}.detail-card textarea{min-height:72px;resize:vertical}.detail-card input:focus,.detail-card textarea:focus{outline:2px solid #7d5cff}.empty-details{color:#a9adba}
     .caption-overlay{position:absolute;bottom:8%;left:8%;right:8%;text-align:center;color:white;font-size:clamp(16px,2.7vw,32px);font-weight:700;line-height:1.35;white-space:pre-wrap;overflow-wrap:anywhere;text-shadow:0 2px 5px #000,0 0 12px #000;pointer-events:none}.caption-overlay:empty{display:none}
+
+    /* Montador de tutorial */
+    .tutorial-page{position:fixed;inset:0;z-index:30;background:#11131a;overflow:auto;padding:24px}
+    .tutorial-page[hidden]{display:none}
+    .tutorial-shell{width:min(100%,1100px);margin:0 auto}
+    .tutorial-head{position:sticky;top:0;z-index:3;background:#11131aee;backdrop-filter:blur(10px);padding:8px 0 16px;border-bottom:1px solid #313543;margin-bottom:20px}
+    .tutorial-head-row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .tutorial-head h2{margin:0;font-size:clamp(1.35rem,3vw,2rem)}
+    .tutorial-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .tutorial-intro{color:#a9adba;margin:10px 0 0}
+    .tutorial-list{display:grid;gap:18px}
+    .tutorial-card{display:grid;grid-template-columns:minmax(260px,45%) 1fr;gap:18px;background:#191d29;border:1px solid #3b4254;border-radius:16px;padding:16px}
+    .tutorial-card img{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:#050609;border-radius:11px}
+    .tutorial-copy{display:flex;flex-direction:column;min-width:0}
+    .tutorial-step{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+    .tutorial-step strong{font-size:1.05rem}
+    .tutorial-time{color:#ffca75;font-variant-numeric:tabular-nums;font-size:.9rem}
+    .tutorial-copy label{color:#c7cad5;font-size:.9rem;margin-bottom:6px}
+    .tutorial-copy textarea{flex:1;min-height:150px;width:100%;resize:vertical;background:#11151f;border:1px solid #4b5368;border-radius:10px;color:white;padding:12px;font:inherit;line-height:1.45}
+    .tutorial-copy textarea:focus{outline:2px solid #7d5cff}
+    .tutorial-empty{padding:40px;text-align:center;color:#a9adba;border:1px dashed #4b5368;border-radius:16px}
+    .youtube-box{margin-top:20px;background:#191d29;border:1px solid #3b4254;border-radius:16px;padding:18px}
+    .youtube-box h3{margin:0 0 8px}.youtube-box p{color:#a9adba;margin:0 0 14px}
+    .youtube-choice{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+    .youtube-choice label{display:flex;gap:7px;align-items:center;cursor:pointer}
+    .youtube-url label{display:block;color:#c7cad5;font-size:.9rem;margin-bottom:6px}
+    .youtube-url input{width:100%;background:#11151f;border:1px solid #4b5368;border-radius:9px;color:white;padding:11px;font:inherit}
+    .youtube-url input:focus{outline:2px solid #7d5cff}
+    .youtube-print-link{display:none}
+    .tutorial-youtube-notice{margin:18px 0 0;padding:14px 16px;background:#191d29;border:1px solid #3b4254;border-radius:12px;color:#f5f6fa}
+    .tutorial-youtube-notice a{color:#b9aaff;overflow-wrap:anywhere}
+
+
+    @media(max-width:760px){.tutorial-card{grid-template-columns:1fr}.tutorial-page{padding:14px}}
+    @media print{
+      body>*:not(.tutorial-page){display:none!important}
+      .tutorial-page{position:static!important;display:block!important;background:white!important;color:#111!important;padding:0!important;overflow:visible!important}
+      .tutorial-head{position:static;background:white!important;border:0!important}
+      .tutorial-actions,.tutorial-intro{display:none!important}
+      .youtube-box{display:none!important}
+      .tutorial-youtube-notice{display:block!important;background:white!important;border:1px solid #bbb!important;color:#111!important}
+      .tutorial-youtube-notice a{color:#111!important;text-decoration:underline!important}
+      .tutorial-list{display:block}
+      .tutorial-card{break-inside:avoid;page-break-inside:avoid;grid-template-columns:46% 1fr;background:white!important;border:1px solid #bbb!important;color:#111!important;margin:0 0 16px}
+      .tutorial-card img{background:#eee!important}
+      .tutorial-time{color:#555!important}
+      .tutorial-copy label{color:#444!important}
+      .tutorial-copy textarea{border:0!important;background:white!important;color:#111!important;resize:none;overflow:visible;min-height:120px}
+    }
+
   </style>
 </head>
 <body>
@@ -29,7 +79,7 @@
       <div class="caption-overlay" id="caption-overlay" aria-live="off"></div>
     </div>
     <p class="meta" id="meta" aria-live="polite">Nenhum vídeo aberto.</p>
-    <div class="tools"><button class="button secondary" id="add-marker" type="button" disabled>+ Adicionar marcador</button><button class="button secondary" id="export-images" type="button" disabled>Exportar imagens</button><button class="button secondary" id="save-xml" type="button" disabled>Salvar XML</button><button class="button secondary" id="load-xml" type="button">Carregar XML</button><button class="button secondary" id="detail" type="button">Detalhar</button><button class="button secondary" id="export-srt" type="button" disabled>Exportar SRT</button><button class="button secondary" id="apply-captions" type="button" disabled aria-pressed="false">Aplicar legenda</button><button class="button secondary" id="export-video" type="button" disabled>Exportar WebM</button><button class="button secondary" id="export-mp4" type="button" disabled>Exportar MP4</button><span class="hint">M: marcador · Espaço: play/pause</span></div>
+    <div class="tools"><button class="button secondary" id="add-marker" type="button" disabled>+ Adicionar marcador</button><button class="button secondary" id="export-images" type="button" disabled>Exportar imagens</button><button class="button secondary" id="generate-tutorial" type="button" disabled>Gerar sequência de prints</button><button class="button secondary" id="save-xml" type="button" disabled>Salvar XML</button><button class="button secondary" id="load-xml" type="button">Carregar XML</button><button class="button secondary" id="detail" type="button">Detalhar</button><button class="button secondary" id="export-srt" type="button" disabled>Exportar SRT</button><button class="button secondary" id="apply-captions" type="button" disabled aria-pressed="false">Aplicar legenda</button><button class="button secondary" id="export-video" type="button" disabled>Exportar WebM</button><button class="button secondary" id="export-mp4" type="button" disabled>Exportar MP4</button><span class="hint">M: marcador · Espaço: play/pause</span></div>
     <p class="hint" id="status" role="status" aria-live="polite"></p>
     <div class="timeline" id="timeline" role="slider" tabindex="0" aria-label="Linha do tempo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track" id="track"><div class="progress" id="progress"></div></div></div>
     <div class="times"><span id="elapsed">00:00</span><span id="duration">00:00</span></div>
@@ -43,6 +93,39 @@
     <div id="detail-list"></div>
     <button class="button" id="save-details" type="button" disabled>Salvar detalhes (XML)</button>
   </aside>
+
+  <section class="tutorial-page" id="tutorial-page" hidden aria-label="Sequência de prints do tutorial">
+    <div class="tutorial-shell">
+      <div class="tutorial-head">
+        <div class="tutorial-head-row">
+          <div>
+            <h2>Sequência de prints</h2>
+            <p class="tutorial-intro">Cada marcador virou uma etapa. Escreva abaixo de cada imagem a orientação que fará parte do tutorial.</p>
+          </div>
+          <div class="tutorial-actions">
+            <button class="button secondary" id="close-tutorial" type="button">← Voltar ao vídeo</button>
+            <button class="button secondary" id="tutorial-xml" type="button">Exportar XML</button>
+            <button class="button" id="tutorial-pdf" type="button">Gerar PDF</button>
+          </div>
+        </div>
+      </div>
+      <div class="tutorial-list" id="tutorial-list"></div>
+      <p class="tutorial-youtube-notice" id="tutorial-youtube-notice" hidden>Disponível no link: <a id="tutorial-youtube-link" href="#" target="_blank" rel="noopener noreferrer"></a></p>
+      <section class="youtube-box" id="youtube-box">
+        <h3>Link do YouTube</h3>
+        <p>Deseja vincular as imagens do tutorial a um vídeo do YouTube no PDF?</p>
+        <div class="youtube-choice">
+          <label><input type="radio" name="youtube-choice" value="no" checked> Não</label>
+          <label><input type="radio" name="youtube-choice" value="yes"> Sim</label>
+        </div>
+        <div class="youtube-url" id="youtube-url-wrap" hidden>
+          <label for="youtube-url">Link do YouTube</label>
+          <input id="youtube-url" type="url" inputmode="url" placeholder="https://www.youtube.com/watch?v=...">
+        </div>
+      </section>
+    </div>
+  </section>
+
   <script>
     const openButton = document.querySelector('#open');
     const fileInput = document.querySelector('#file');
@@ -52,6 +135,17 @@
     const meta = document.querySelector('#meta');
     const addMarkerButton = document.querySelector('#add-marker');
     const exportImagesButton = document.querySelector('#export-images');
+    const generateTutorialButton = document.querySelector('#generate-tutorial');
+    const tutorialPage = document.querySelector('#tutorial-page');
+    const tutorialList = document.querySelector('#tutorial-list');
+    const closeTutorialButton = document.querySelector('#close-tutorial');
+    const tutorialXmlButton = document.querySelector('#tutorial-xml');
+    const tutorialPdfButton = document.querySelector('#tutorial-pdf');
+    const youtubeUrlWrap = document.querySelector('#youtube-url-wrap');
+    const youtubeUrlInput = document.querySelector('#youtube-url');
+    const tutorialYoutubeNotice = document.querySelector('#tutorial-youtube-notice');
+    const tutorialYoutubeLink = document.querySelector('#tutorial-youtube-link');
+    const youtubeChoices = [...document.querySelectorAll('input[name="youtube-choice"]')];
     const saveXmlButton = document.querySelector('#save-xml');
     const loadXmlButton = document.querySelector('#load-xml');
     const detailButton = document.querySelector('#detail');
@@ -77,6 +171,9 @@
     let busy = false;
     let videoName = '';
     let captionsEnabled = false;
+    let tutorialSteps = [];
+    let tutorialYoutubeEnabled = false;
+    let tutorialYoutubeUrl = '';
     let audioContext, audioDestination;
     const hasCaptions = () => markers.some(marker => marker.caption.trim());
     const mp4Mime = window.MediaRecorder && ['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4'].find(type=>MediaRecorder.isTypeSupported(type));
@@ -84,6 +181,7 @@
     const updateExportButtons = () => {
       openButton.disabled = loadXmlButton.disabled = busy;
       exportImagesButton.disabled = busy || !markers.length || !video.currentSrc || !Number.isFinite(video.duration);
+      generateTutorialButton.disabled = busy || !markers.length || !video.currentSrc || !Number.isFinite(video.duration);
       saveXmlButton.disabled = busy || !markers.length;
       exportSrtButton.disabled = busy || !hasCaptions();
       applyCaptionsButton.disabled = busy || !video.currentSrc || !hasCaptions();
@@ -356,6 +454,153 @@
         video.currentTime = seconds;
       });
     }
+
+    function dataUrlFromBlob(blob) {
+      return new Promise((resolve,reject)=>{
+        const reader=new FileReader();
+        reader.onload=()=>resolve(reader.result);
+        reader.onerror=()=>reject(new Error('Não foi possível preparar a imagem.'));
+        reader.readAsDataURL(blob);
+      });
+    }
+
+
+    youtubeChoices.forEach(choice=>choice.addEventListener('change',()=>{
+      tutorialYoutubeEnabled=document.querySelector('input[name="youtube-choice"]:checked')?.value==='yes';
+      youtubeUrlWrap.hidden=!tutorialYoutubeEnabled;
+      renderTutorial();
+    }));
+    youtubeUrlInput.addEventListener('input',()=>{
+      tutorialYoutubeUrl=youtubeUrlInput.value.trim();
+      renderTutorial();
+    });
+
+    function validYoutubeLink() {
+      if(!tutorialYoutubeEnabled || !tutorialYoutubeUrl) return '';
+      try{
+        const url=new URL(tutorialYoutubeUrl);
+        const host=url.hostname.replace(/^www\./,'').toLowerCase();
+        return ['youtube.com','youtu.be','m.youtube.com'].includes(host) ? url.href : '';
+      }catch(_){ return ''; }
+    }
+
+    function updateYoutubeNotice() {
+      const link=validYoutubeLink();
+      tutorialYoutubeNotice.hidden=!link;
+      if(link){
+        tutorialYoutubeLink.href=link;
+        tutorialYoutubeLink.textContent=link;
+      }else{
+        tutorialYoutubeLink.removeAttribute('href');
+        tutorialYoutubeLink.textContent='';
+      }
+    }
+
+    function renderTutorial() {
+      tutorialList.replaceChildren();
+      updateYoutubeNotice();
+      if(!tutorialSteps.length) {
+        const empty=document.createElement('div');
+        empty.className='tutorial-empty';
+        empty.textContent='Nenhuma etapa foi gerada.';
+        tutorialList.append(empty);
+        return;
+      }
+      tutorialSteps.forEach((step,index)=>{
+        const card=document.createElement('article'); card.className='tutorial-card';
+        const image=document.createElement('img'); image.src=step.image; image.alt=`Print da etapa ${index+1}`;
+        const youtubeLink=validYoutubeLink();
+        let imageNode=image;
+        if(youtubeLink){
+          const anchor=document.createElement('a');
+          anchor.href=youtubeLink; anchor.target='_blank'; anchor.rel='noopener noreferrer';
+          anchor.title='Abrir vídeo no YouTube';
+          anchor.append(image);
+          imageNode=anchor;
+        }
+        const copy=document.createElement('div'); copy.className='tutorial-copy';
+        const top=document.createElement('div'); top.className='tutorial-step';
+        const title=document.createElement('strong'); title.textContent=`Etapa ${String(index+1).padStart(2,'0')}`;
+        const time=document.createElement('span'); time.className='tutorial-time'; time.textContent=formatTime(step.time);
+        top.append(title,time);
+        const label=document.createElement('label'); label.textContent='Comentário / instrução';
+        label.htmlFor=`tutorial-comment-${index}`;
+        const textarea=document.createElement('textarea');
+        textarea.id=`tutorial-comment-${index}`;
+        textarea.placeholder='Descreva o que deve ser feito nesta etapa...';
+        textarea.value=step.comment;
+        textarea.addEventListener('input',()=>{ step.comment=textarea.value; });
+        copy.append(top,label,textarea);
+        card.append(imageNode,copy);
+        tutorialList.append(card);
+      });
+    }
+
+    generateTutorialButton.addEventListener('click',async()=>{
+      if(!markers.length || busy || !video.currentSrc) return;
+      busy=true; updateExportButtons();
+      const wasPlaying=!video.paused, originalTime=video.currentTime;
+      video.pause();
+      try{
+        const canvas=document.createElement('canvas');
+        canvas.width=video.videoWidth; canvas.height=video.videoHeight;
+        if(!canvas.width || !canvas.height) throw new Error('O vídeo ainda não está pronto para capturar imagens.');
+        const context=canvas.getContext('2d');
+        const previousComments=tutorialSteps.map(step=>step.comment);
+        const steps=[];
+        for(let i=0;i<markers.length;i++){
+          status.textContent=`Preparando etapa ${i+1} de ${markers.length}…`;
+          await seekTo(markers[i].time);
+          context.drawImage(video,0,0,canvas.width,canvas.height);
+          const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.92));
+          if(!blob) throw new Error('Falha ao criar o print.');
+          steps.push({
+            time:markers[i].time,
+            image:await dataUrlFromBlob(blob),
+            imageName:`marcador_${String(i+1).padStart(3,'0')}.jpg`,
+            comment:previousComments[i] ?? markers[i].caption ?? ''
+          });
+        }
+        tutorialSteps=steps;
+        renderTutorial();
+        tutorialPage.hidden=false;
+        document.body.style.overflow='hidden';
+        status.textContent=`Sequência criada com ${steps.length} etapa(s).`;
+        tutorialPage.scrollTop=0;
+      }catch(error){
+        status.textContent=`Erro ao gerar sequência: ${error.message}`;
+      }finally{
+        try{ await seekTo(originalTime); if(wasPlaying) await video.play(); }catch(_){}
+        busy=false; updateExportButtons();
+      }
+    });
+
+    closeTutorialButton.addEventListener('click',()=>{
+      tutorialPage.hidden=true;
+      document.body.style.overflow='';
+    });
+
+    tutorialXmlButton.addEventListener('click',()=>{
+      if(!tutorialSteps.length) return;
+      const rows=tutorialSteps.map((step,index)=>`    <etapa id="${index+1}" tempo="${step.time.toFixed(3)}" horario="${formatTime(step.time)}" imagem="${escapeXml(step.imageName)}">\n      <comentario>${escapeXml(step.comment)}</comentario>\n    </etapa>`);
+      const youtubeLink=validYoutubeLink();
+      const youtubeXml=youtubeLink ? `\n  <youtube url="${escapeXml(youtubeLink)}" />` : '';
+      const xml=`<?xml version="1.0" encoding="UTF-8"?>\n<tutorial versao="1.0">\n  <video nome="${escapeXml(videoName)}" />${youtubeXml}\n  <etapas>\n${rows.join('\n')}\n  </etapas>\n</tutorial>\n`;
+      download(new Blob([xml],{type:'application/xml;charset=utf-8'}),`${baseName()}_tutorial.xml`);
+    });
+
+    tutorialPdfButton.addEventListener('click',()=>{
+      if(!tutorialSteps.length) return;
+      if(tutorialYoutubeEnabled && !validYoutubeLink()){
+        alert('Informe um link válido do YouTube ou selecione “Não”.');
+        youtubeUrlInput.focus();
+        return;
+      }
+      /* Quando o YouTube está habilitado, cada print fica dentro de um link.
+         Ao usar "Salvar como PDF", navegadores compatíveis preservam o hyperlink. */
+      window.print();
+    });
+
     exportImagesButton.addEventListener('click', async () => {
       if (!markers.length || busy) return;
       busy = true; updateExportButtons();
@@ -414,6 +659,14 @@
       video.load();
       if (currentURL) URL.revokeObjectURL(currentURL);
       if (!keepMarkers) markers = [];
+      tutorialSteps = [];
+      tutorialYoutubeEnabled = false;
+      tutorialYoutubeUrl = '';
+      youtubeChoices.forEach(choice=>choice.checked=choice.value==='no');
+      youtubeUrlWrap.hidden=true;
+      youtubeUrlInput.value='';
+      tutorialPage.hidden = true;
+      document.body.style.overflow = '';
       videoName = file.name;
       captionsEnabled=false; captionOverlay.textContent='';
       applyCaptionsButton.textContent='Aplicar legenda'; applyCaptionsButton.setAttribute('aria-pressed','false');

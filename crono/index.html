@@ -1,6 +1,6 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>UC1 — Planejar Projeto Visual</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f4f6f9;color:#172033;font-family:Arial,sans-serif}header{background:#17233f;color:#fff;padding:28px 5%}header h1{margin:0 0 5px}header p{margin:0;opacity:.75}main{width:min(1400px,92%);margin:25px auto}.box{background:#fff;border:1px solid #dde3ec;border-radius:15px;padding:20px;margin-bottom:20px;box-shadow:0 6px 20px #0000000d}h2{font-size:18px;margin-top:0}.inds,.kgs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.ind,.grp{border:1px solid #dde3ec;border-radius:11px;padding:14px;background:#fafbfc}.ind b{color:#3157d5}.grp h3{margin:0 0 10px;font-size:15px}.chips{display:flex;gap:7px;flex-wrap:wrap}.chip,.placed{background:#eaf0ff;border:1px solid #bdc9ef;color:#2949a3;border-radius:8px;padding:8px 10px;font-size:13px;cursor:grab}.head,.lesson{display:grid;grid-template-columns:75px 90px 150px 145px 120px 1fr 74px;gap:10px}.head{font-size:12px;color:#707b8d;font-weight:bold;padding:0 8px 7px}.lesson{padding:10px 8px;border-top:1px solid #e3e7ed}.lesson-number{font-weight:700;color:#3157d5;display:flex;align-items:center}.room{width:100%;box-sizing:border-box}.actions{display:flex;gap:5px;align-items:center;justify-content:center}.dup{border:0;background:#e9eefc;color:#3157d5;border-radius:7px;width:30px;height:30px;cursor:pointer;font-size:16px;font-weight:bold}.date,.prof{width:100%;padding:10px;border:1px solid #d9dfe8;border-radius:8px;background:#fff;color:#172033}.drop{min-height:62px;border:2px dashed #cbd3df;border-radius:9px;padding:8px;display:flex;flex-wrap:wrap;gap:7px}.drop.over{background:#f0f4ff;border-color:#3157d5}.drop:empty:after{content:"Arraste os conhecimentos para cá";color:#9ba5b4;font-size:13px;padding:12px}.placed{display:flex;gap:7px;align-items:center}.placed button,.del{border:0;background:transparent;color:#8791a1;cursor:pointer;font-size:17px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.add{background:#3157d5;color:#fff;border:0;border-radius:8px;padding:10px 14px;font-weight:bold;cursor:pointer}.uc-btn{background:#fff;color:#17233f;border:1px solid #fff;padding:10px 18px;border-radius:9px;font-weight:bold;cursor:pointer}.uc-btn.active{color:#fff}
+*{box-sizing:border-box}body{margin:0;background:#f4f6f9;color:#172033;font-family:Arial,sans-serif}header{background:#17233f;color:#fff;padding:28px 5%}header h1{margin:0 0 5px}header p{margin:0;opacity:.75}main{width:min(1400px,92%);margin:25px auto}.box{background:#fff;border:1px solid #dde3ec;border-radius:15px;padding:20px;margin-bottom:20px;box-shadow:0 6px 20px #0000000d}h2{font-size:18px;margin-top:0}.inds,.kgs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.ind,.grp{border:1px solid #dde3ec;border-radius:11px;padding:14px;background:#fafbfc}.ind b{color:#3157d5}.grp h3{margin:0 0 10px;font-size:15px}.chips{display:flex;gap:7px;flex-wrap:wrap}.chip,.placed{background:#eaf0ff;border:1px solid #bdc9ef;color:#2949a3;border-radius:8px;padding:8px 10px;font-size:13px;cursor:grab}.head,.lesson{display:grid;grid-template-columns:52px 75px 90px 150px 145px 120px 1fr minmax(180px,240px) 112px;gap:10px}.head{font-size:12px;color:#707b8d;font-weight:bold;padding:0 8px 7px}.lesson{padding:10px 8px;border-top:1px solid #e3e7ed}.lesson-number{font-weight:700;color:#3157d5;display:flex;align-items:center}.room{width:100%;box-sizing:border-box}.actions{display:flex;gap:5px;align-items:center;justify-content:center}.dup{border:0;background:#e9eefc;color:#3157d5;border-radius:7px;width:30px;height:30px;cursor:pointer;font-size:16px;font-weight:bold}.date,.prof{width:100%;padding:10px;border:1px solid #d9dfe8;border-radius:8px;background:#fff;color:#172033}.drop{min-height:62px;border:2px dashed #cbd3df;border-radius:9px;padding:8px;display:flex;flex-wrap:wrap;gap:7px}.drop.over{background:#f0f4ff;border-color:#3157d5}.drop:empty:after{content:"Arraste os conhecimentos para cá";color:#9ba5b4;font-size:13px;padding:12px}.placed{display:flex;gap:7px;align-items:center}.placed button,.del{border:0;background:transparent;color:#8791a1;cursor:pointer;font-size:17px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.add{background:#3157d5;color:#fff;border:0;border-radius:8px;padding:10px 14px;font-weight:bold;cursor:pointer}.uc-btn{background:#fff;color:#17233f;border:1px solid #fff;padding:10px 18px;border-radius:9px;font-weight:bold;cursor:pointer}.uc-btn.active{color:#fff}
 .uc-btn[data-uc="UC1"].active{background:#3157d5;border-color:#6f8cff}
 .uc-btn[data-uc="UC2"].active{background:#d06a24;border-color:#ef9b60}
 .uc-btn.pending{opacity:.72}
@@ -14,97 +14,92 @@
 .lesson.dragging{opacity:.45}
 .lesson.drag-target{outline:2px dashed #777;outline-offset:3px}
 .placed.uc1{border-left:5px solid #3157d5}
-.placed.uc2{border-left:5px solid #d06a24}.count{font-size:13px;color:#697386}.count b{color:#167b5b}.note{font-size:12px;color:#697386;margin-bottom:0}@media(max-width:800px){.inds,.kgs{grid-template-columns:1fr}.head,.lesson{grid-template-columns:60px 70px 100px 105px 90px 1fr 64px}}
+.placed.uc2{border-left:5px solid #d06a24}.count{font-size:13px;color:#697386}.count b{color:#167b5b}.note{font-size:12px;color:#697386;margin-bottom:0}@media(max-width:800px){.inds,.kgs{grid-template-columns:1fr}.head,.lesson{grid-template-columns:44px 60px 70px 100px 105px 90px 1fr 150px 96px}}
+
+.lesson.date-conflict{
+  background:#fff0f0 !important;
+  border-color:#e8a4a4 !important;
+  box-shadow:0 0 0 1px rgba(190,70,70,.08);
+}
+
+.icon-btn{
+  width:38px !important;
+  min-width:38px !important;
+  height:38px !important;
+  padding:7px !important;
+  display:inline-flex !important;
+  align-items:center;
+  justify-content:center;
+}
+.icon-btn svg{
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* Espaçamento do grupo de ferramentas por ícones */
+.icon-btn + .icon-btn{
+  margin-left:6px !important;
+}
+.icon-btn:nth-of-type(4){
+  margin-right:10px !important;
+}
+
+/* Respiro entre a barra de ferramentas e a lista de aulas */
+#lessons{
+  margin-top:8px;
+}
+.head{
+  margin-top:12px;
+}
 </style></head><body>
 <header><div style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap">
 <div><h1 id="ucTitle">UC1 — Planejar Projeto Visual</h1><p id="ucHours">Carga horária: 36 horas • Planejador de aulas</p></div>
-<div><label style="display:block;font-size:12px;margin-bottom:6px;opacity:.8">UNIDADE CURRICULAR</label>
-<div id="ucButtons" style="display:flex;gap:8px;flex-wrap:wrap">
-<button type="button" class="uc-btn active" data-uc="UC1" onclick="selectUC('UC1')">UC1</button>
-<button type="button" class="uc-btn" data-uc="UC2" onclick="selectUC('UC2')">UC2</button>
-<button type="button" class="uc-btn pending" data-uc="UC3" onclick="selectUC('UC3')">UC3</button>
-<button type="button" class="uc-btn pending" data-uc="UC4" onclick="selectUC('UC4')">UC4</button>
-<button type="button" class="uc-btn pending" data-uc="UC5" onclick="selectUC('UC5')">UC5</button>
-<button type="button" class="uc-btn pending" data-uc="UC6" onclick="selectUC('UC6')">UC6</button>
-<button type="button" class="uc-btn pending" data-uc="UC7" onclick="selectUC('UC7')">UC7</button>
-<button type="button" class="uc-btn pending" data-uc="UC8" onclick="selectUC('UC8')">UC8</button>
-<button type="button" class="uc-btn pending" data-uc="UC9" onclick="selectUC('UC9')">UC9</button>
-<button type="button" class="uc-btn pending" data-uc="UC10" onclick="selectUC('UC10')">UC10</button>
-<button type="button" class="uc-btn pending" data-uc="UC11" onclick="selectUC('UC11')">UC11</button>
-<button type="button" class="uc-btn pending" data-uc="UC12" onclick="selectUC('UC12')">UC12</button>
-<button type="button" class="uc-btn pending" data-uc="UC13" onclick="selectUC('UC13')">UC13</button>
-<button type="button" class="uc-btn pending" data-uc="UC14" onclick="selectUC('UC14')">UC14</button>
-<button type="button" class="uc-btn pending" data-uc="UC15" onclick="selectUC('UC15')">UC15</button>
-<button type="button" class="uc-btn pending" data-uc="UC16" onclick="selectUC('UC16')">UC16</button>
-<button type="button" class="uc-btn pending" data-uc="UC17" onclick="selectUC('UC17')">UC17</button>
-<button type="button" class="uc-btn pending" data-uc="UC18" onclick="selectUC('UC18')">UC18</button>
-<button type="button" class="uc-btn pending" data-uc="UC19" onclick="selectUC('UC19')">UC19</button>
-<button type="button" class="uc-btn pending" data-uc="UC20" onclick="selectUC('UC20')">UC20</button>
-</div></div></div></header><main>
+<div>
+<div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+<button type="button" class="uc-btn" onclick="document.getElementById('courseXmlFile').click()">Carregar XML de Curso</button>
+<input id="courseXmlFile" type="file" accept=".xml,text/xml,application/xml" hidden>
+</div>
+<label style="display:block;font-size:12px;margin-bottom:6px;opacity:.8">UNIDADE CURRICULAR</label>
+<div id="ucButtons" style="display:flex;gap:8px;flex-wrap:wrap"></div></div></div></header><main>
+<section class="box" style="padding:14px 20px">
+  <label for="courseTitle" style="display:block;font-size:12px;font-weight:bold;color:#707b8d;margin-bottom:6px">CURSO</label>
+  <input id="courseTitle" type="text" value="" placeholder="Carregue um XML de Curso"
+    style="width:100%;padding:11px 12px;border:1px solid #d9dfe8;border-radius:8px;background:#fff;color:#172033;font-size:16px;font-weight:700">
+</section>
 
 <section class="box"><h2>Conhecimentos</h2><div class="kgs" id="knowledgeBox"></div>
 <p class="note">Selecione a UC acima e arraste os conhecimentos para as aulas correspondentes.</p></section>
 <section class="box"><div class="top"><div><h2 style="margin-bottom:5px">Planejamento</h2><div class="count">Conhecimentos utilizados: <b id="count">0 de 13</b></div></div><div style="display:flex;gap:8px;flex-wrap:wrap">
-<button class="add" onclick="document.getElementById('xmlFile').click()">Abrir XML</button>
-<button class="add" onclick="saveXML()">Salvar XML</button>
-<button class="add" onclick="downloadReport()">Relatório</button>
-<button class="add" onclick="analyzeHours()">Analisar</button>
+<button class="add icon-btn" onclick="document.getElementById('xmlFile').click()" title="Abrir cronograma" aria-label="Abrir cronograma">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h7l2 2h9v9.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6.5Zm0 3h18M7 14h10"/></svg>
+</button>
+<button class="add icon-btn" onclick="saveXML()" title="Salvar cronograma" aria-label="Salvar cronograma">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h12l3 3v15H4V3h1Zm3 0v6h8V3M8 21v-7h8v7"/></svg>
+</button>
+<button class="add icon-btn" onclick="openReportMenu()" title="Relatório" aria-label="Relatório">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l4 4v16H6V2Zm9 0v5h4M9 11h7M9 15h7M9 19h5"/></svg>
+</button>
+<button class="add icon-btn" onclick="analyzeHours()" title="Analisar" aria-label="Analisar">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V11h3v9H5Zm6 0V5h3v15h-3Zm6 0v-7h3v7h-3Z"/></svg>
+</button>
+<button id="hideUncheckedBtn" class="add" onclick="toggleUnchecked()">Ocultar desmarcados</button>
+<button id="clearSelectionsBtn" class="add" onclick="clearSelections()">Limpar seleções</button>
+<button id="actionsBtn" class="add" onclick="openActions()">Ações</button>
+<button id="sortDatesBtn" class="add" onclick="organizeDates()">Organizar datas</button>
+<button id="combineBtn" class="add" onclick="openCombineData()">Adicionar dados</button>
 <button id="addLessonBtn" class="add" onclick="addLesson()">+ Adicionar aula — UC1</button>
 <input id="xmlFile" type="file" accept=".xml,text/xml,application/xml" hidden>
 </div></div>
-<div class="head"><div>Aula</div><div>UC</div><div>Dia da aula</div><div>Professor</div><div>Sala</div><div>Planejamento</div><div>Ações</div></div><div id="lessons"></div></section>
-</main><script>
-const UCS={
- UC1:{
-  title:'Planejar Projeto Visual',hours:36,
-  indicators:[
-   'Organiza documentos digitais e pastas no gerenciador de arquivos de acordo com as categorias definidas.',
-   'Define as etapas de trabalho de acordo com o briefing.',
-   'Elabora documentação do projeto visual conforme especificidades/demanda.'
-  ],
-  groups:[
-   ['Briefing',[['uc1_a','Objetivos e metas'],['uc1_b','Orçamento e prazos'],['uc1_c','Público alvo'],['uc1_d','Mídias'],['uc1_e','Escopo do projeto visual']]],
-   ['Gerenciamento de arquivos',[['uc1_f','Nomeação'],['uc1_g','Salvamento'],['uc1_h','Versionamento'],['uc1_i','Backup']]],
-   ['Legislação',[['uc1_j','Direitos da propriedade intelectual'],['uc1_k','Propriedade industrial'],['uc1_l','Direitos autorais'],['uc1_m','Contratos']]]
-  ]
- },
- UC2:{
-  title:'Manipular imagem bitmap',hours:60,
-  indicators:[
-   'Configura resoluções, formatos e extensões de arquivo da arte gráfica de acordo com o projeto visual.',
-   'Edita a imagem bitmap de acordo com o briefing.',
-   'Finaliza imagem bitmap de acordo com os tipos de saída.'
-  ],
-  groups:[
-   ['Design gráfico',[['uc2_a','Conceitos'],['uc2_b','Princípios: proximidade, alinhamento, contraste, repetição e variedade'],['uc2_c','Fundamentos: equilíbrio, tensão, nivelamento e aguçamento, atração e agrupamento, positivo e negativo, enquadramento e hierarquia e composição'],['uc2_d','Linguagem visual: ponto, linha, forma, direção, dimensão, escala, movimento e textura']]],
-   ['Resolução de imagens',[['uc2_e','Densidade por pixel (LPI, DPI e PPI)']]],
-   ['Teoria das Cores',[['uc2_f','Aspectos físicos e psicológicos'],['uc2_g','Padrão RGB e CMYK'],['uc2_h','Componentes da cor (tom, matiz e saturação)']]],
-   ['Tipografia',[['uc2_i','Conceitos e aplicações'],['uc2_j','Edição de textos (estilos de parágrafo, caracteres e aplicação)']]],
-   ['Edição de imagem',[['uc2_k','Interface do programa'],['uc2_l','Ferramentas e configuração de arquivo'],['uc2_m','Técnicas de seleção'],['uc2_n','Camadas'],['uc2_o','Fusões'],['uc2_p','Máscaras'],['uc2_q','Filtros e objetos inteligentes'],['uc2_r','Restauração de imagem'],['uc2_s','Ferramentas de seleção']]],
-   ['Canais de cores',[['uc2_t','Alpha'],['uc2_u','Seleções e edições']]],
-   ['Configuração de layout',[['uc2_v','Construção de grids'],['uc2_w','Réguas'],['uc2_x','Linhas guias'],['uc2_y','Sangrias']]]
-  ]
- },
- UC3:{title:'Desenvolver ilustração vetorial',hours:60,indicators:[],groups:[['Conhecimentos',[['uc3_1','Software de ilustração vetorial: conceitos e aplicações'],['uc3_2','Interface do software vetorial'],['uc3_3','Configuração do software vetorial'],['uc3_4','Importação de arquivos'],['uc3_5','Exportação de arquivos'],['uc3_6','Vetores: ponto'],['uc3_7','Vetores: linha'],['uc3_8','Vetores: planos e eixos'],['uc3_9','Manipulação de vetores'],['uc3_10','Fusão de formas'],['uc3_11','Interseção de formas'],['uc3_12','Subtração de formas'],['uc3_13','Sobreposição de formas'],['uc3_14','Conversão de vetor em bitmap'],['uc3_15','Transformação de bitmap em vetor'],['uc3_16','Camadas'],['uc3_17','Máscaras'],['uc3_18','Sobreposição'],['uc3_19','Pranchetas'],['uc3_20','Aplicações de cores'],['uc3_21','Gradientes'],['uc3_22','Combinações de cores'],['uc3_23','Tons de cinza'],['uc3_24','RGB'],['uc3_25','CMYK'],['uc3_26','Tipografia: conceito e aplicações'],['uc3_27','Estilos de parágrafo'],['uc3_28','Caracteres'],['uc3_29','Texto em vetores'],['uc3_30','Colunas'],['uc3_31','Máscaras em texto'],['uc3_32','Tipologia'],['uc3_33','Tipometria'],['uc3_34','Efeitos especiais em texto'],['uc3_35','Preparação de layouts para impressão'],['uc3_36','Sangrias'],['uc3_37','Marcas de dobra'],['uc3_38','Recortes'],['uc3_39','Cartão-postal'],['uc3_40','Cartaz'],['uc3_41','Folder']]]]},
- UC4:{title:'Produzir projeto visual',hours:36,indicators:[],groups:[['Conhecimentos',[['uc4_1','Elemento focal'],['uc4_2','Estrutura e equilíbrio'],['uc4_3','Contraste'],['uc4_4','Plano x profundidade'],['uc4_5','Sutileza x ousadia'],['uc4_6','Minimização x exagero'],['uc4_7','Simplicidade x complexidade'],['uc4_8','Regularidade x irregularidade'],['uc4_9','Simetria x assimetria'],['uc4_10','Padrões'],['uc4_11','Processos de criação'],['uc4_12','Tendências de mercado'],['uc4_13','Fundamentos do design gráfico'],['uc4_14','Equilíbrio'],['uc4_15','Tensão'],['uc4_16','Nivelamento e aguçamento'],['uc4_17','Atração e agrupamento'],['uc4_18','Positivo e negativo'],['uc4_19','Enquadramento'],['uc4_20','Hierarquia'],['uc4_21','Tecnologias de impressão'],['uc4_22','Sistemas e processos de impressão'],['uc4_23','Tintas e suportes'],['uc4_24','Fechamento de arquivo'],['uc4_25','PostScript'],['uc4_26','PDF'],['uc4_27','Publicação impressa'],['uc4_28','Publicação digital']]]]},
- UC5:{title:'Projeto Integrador Assistente de Produção Gráfica',hours:20,indicators:[],groups:[]},
- UC6:{title:'Planejar projeto de vídeo digital',hours:48,indicators:[],groups:[['Conhecimentos',[['uc6_1','Briefing: objetivos e metas'],['uc6_2','Orçamento e prazos'],['uc6_3','Público alvo'],['uc6_4','Escopo do projeto'],['uc6_5','História do vídeo'],['uc6_6','Cinema'],['uc6_7','TV'],['uc6_8','Internet'],['uc6_9','Dispositivos móveis'],['uc6_10','Streaming'],['uc6_11','Plano geral'],['uc6_12','Plano máster'],['uc6_13','Primeiro plano'],['uc6_14','Plano americano'],['uc6_15','Plano médio'],['uc6_16','Plano conjunto'],['uc6_17','Close up'],['uc6_18','Plano detalhe'],['uc6_19','Plano panorâmico'],['uc6_20','Travelling'],['uc6_21','Dolly'],['uc6_22','Zoom in'],['uc6_23','Zoom out'],['uc6_24','Panorâmica'],['uc6_25','Tilt'],['uc6_26','Storyboard'],['uc6_27','Animatic'],['uc6_28','Sequência de cenas'],['uc6_29','Planos e takes'],['uc6_30','Jornada do herói'],['uc6_31','Estrutura de 3 atos'],['uc6_32','Personagem'],['uc6_33','Narrador'],['uc6_34','Tempo'],['uc6_35','Fotografia'],['uc6_36','Iluminação'],['uc6_37','Cenário'],['uc6_38','Áudio: propriedades'],['uc6_39','Duração'],['uc6_40','Timbre'],['uc6_41','Intensidade'],['uc6_42','Altura'],['uc6_43','Sons concretos'],['uc6_44','Sons vocálicos'],['uc6_45','Trilha sonora'],['uc6_46','Música incidental'],['uc6_47','Música programática']]]]},
- UC7:{title:'Produzir material para áudio e vídeo digital',hours:36,indicators:[],groups:[['Conhecimentos',[['uc7_1','Captação de vídeo'],['uc7_2','Operação de vídeo'],['uc7_3','Formatos e padrões de vídeo'],['uc7_4','PAL'],['uc7_5','NTSC'],['uc7_6','Secam'],['uc7_7','DV'],['uc7_8','HD'],['uc7_9','UltraHD'],['uc7_10','Captação de áudio'],['uc7_11','Operação de áudio'],['uc7_12','Formatos de áudio'],['uc7_13','Foco'],['uc7_14','Abertura do diafragma'],['uc7_15','Velocidade'],['uc7_16','Sensibilidade'],['uc7_17','Lentes'],['uc7_18','Filtros'],['uc7_19','Operação de câmera'],['uc7_20','Posicionamento de câmera'],['uc7_21','Movimentação de câmera'],['uc7_22','Distância focal'],['uc7_23','Foco analógico'],['uc7_24','Foco digital']]]]},
- UC8:{title:'Editar vídeo e áudio digital',hours:60,indicators:[],groups:[['Conhecimentos',[['uc8_1','Gerenciamento de arquivos'],['uc8_2','Nomeação'],['uc8_3','Salvamento'],['uc8_4','Versionamento'],['uc8_5','Backup'],['uc8_6','GC'],['uc8_7','Marca d’água'],['uc8_8','Correção de cor'],['uc8_9','Coloração'],['uc8_10','Samples'],['uc8_11','Jingle'],['uc8_12','Locução comercial'],['uc8_13','Software de edição: conceitos'],['uc8_14','Configurações do software de edição'],['uc8_15','Efeitos'],['uc8_16','Decupagem'],['uc8_17','Separação de tomadas'],['uc8_18','Exclusão de cenas inadequadas'],['uc8_19','Exclusão de ruídos'],['uc8_20','Correção de ambiente'],['uc8_21','Edição institucional'],['uc8_22','Documentário'],['uc8_23','Educacional'],['uc8_24','Eventos'],['uc8_25','Criação de sequências'],['uc8_26','Ferramenta fatiar'],['uc8_27','Organização de footages'],['uc8_28','Camadas de áudio e vídeo'],['uc8_29','Painel de efeitos'],['uc8_30','Montagem dos takes'],['uc8_31','Mixagem de som e imagem'],['uc8_32','Transições'],['uc8_33','Edição de áudio'],['uc8_34','Foley'],['uc8_35','Fundo musical'],['uc8_36','Volume'],['uc8_37','Equalização'],['uc8_38','Compressão'],['uc8_39','Descompressão'],['uc8_40','Frequência'],['uc8_41','Configurações de render'],['uc8_42','Formatos de saída de vídeo'],['uc8_43','Formatos de saída de áudio']]]]},
- UC9:{title:'Animar elemento gráfico',hours:48,indicators:[],groups:[['Conhecimentos',[['uc9_1','Bitmap e vetorial: padrão de cor'],['uc9_2','Montagem de camadas'],['uc9_3','Formato de arquivo'],['uc9_4','Comprimir e esticar'],['uc9_5','Antecipação'],['uc9_6','Encenação'],['uc9_7','Pose a pose'],['uc9_8','Animação direta'],['uc9_9','Sobreposição e continuidade'],['uc9_10','Aceleração e desaceleração'],['uc9_11','Movimento em arco'],['uc9_12','Ação secundária'],['uc9_13','Temporização'],['uc9_14','Apelo'],['uc9_15','Criação de composições'],['uc9_16','Formatos'],['uc9_17','Contagem de frames'],['uc9_18','Organização de camadas'],['uc9_19','Posição'],['uc9_20','Escala'],['uc9_21','Rotação'],['uc9_22','Visibilidade'],['uc9_23','Preenchimento'],['uc9_24','Formas'],['uc9_25','Criação de máscaras'],['uc9_26','Recorte'],['uc9_27','Edição de máscaras'],['uc9_28','Modos de mesclagem'],['uc9_29','Aplicação de efeitos'],['uc9_30','Poses'],['uc9_31','Backups'],['uc9_32','Workflow'],['uc9_33','Keyframes'],['uc9_34','Editor gráfico de curvas'],['uc9_35','Scripts'],['uc9_36','Configurações de render'],['uc9_37','Efeitos em textos'],['uc9_38','Mesclagem em textos'],['uc9_39','Lower third']]]]},
- UC10:{title:'Produzir efeitos visuais',hours:60,indicators:[],groups:[['Conhecimentos',[['uc10_1','Configuração do software'],['uc10_2','Operação do software'],['uc10_3','Iluminação em camadas'],['uc10_4','Partículas'],['uc10_5','Efeitos de lentes'],['uc10_6','Efeitos de cores'],['uc10_7','Distorções de camadas'],['uc10_8','Rotoscopia'],['uc10_9','Motion tracker'],['uc10_10','Chroma key'],['uc10_11','Recorte de imagem'],['uc10_12','Técnicas de imagem'],['uc10_13','Aplicação de imagem'],['uc10_14','Modos de mesclagem'],['uc10_15','Criação de câmeras'],['uc10_16','Animação de câmeras'],['uc10_17','Ambiente 3D'],['uc10_18','Camadas 3D'],['uc10_19','Dynamic Link'],['uc10_20','Exportação e fechamento'],['uc10_21','Tipos de mídias'],['uc10_22','Publicação on-line'],['uc10_23','Checklist de créditos'],['uc10_24','Inserção de elenco']]]]},
- UC11:{title:'Projeto Integrador Editor de Vídeo Digital',hours:20,indicators:[],groups:[]},
- UC12:{title:'Planejar animação',hours:60,indicators:[],groups:[['Conhecimentos',[['uc12_1','Fundamentos do desenho artístico'],['uc12_2','Perspectiva'],['uc12_3','Estrutura de objetos e personagens'],['uc12_4','Proporção de objetos e personagens'],['uc12_5','Nomeação de arquivos'],['uc12_6','Edição de arquivos'],['uc12_7','Salvamento'],['uc12_8','Versionamento'],['uc12_9','Backup'],['uc12_10','Conceito de animação'],['uc12_11','História da animação'],['uc12_12','Animação tradicional'],['uc12_13','Rotoscopia'],['uc12_14','Animação 2D'],['uc12_15','Animação 3D'],['uc12_16','Stop motion'],['uc12_17','12 princípios da animação'],['uc12_18','Storytelling'],['uc12_19','Storyboard'],['uc12_20','Animatic'],['uc12_21','Jornada do herói'],['uc12_22','Estrutura de 3 atos'],['uc12_23','Personagem'],['uc12_24','Narrador'],['uc12_25','Tempo'],['uc12_26','Fotografia'],['uc12_27','Iluminação'],['uc12_28','Cenário'],['uc12_29','Grande plano geral'],['uc12_30','Plano aberto'],['uc12_31','Plano de conjunto'],['uc12_32','Plano médio'],['uc12_33','Plano americano'],['uc12_34','Plano próximo'],['uc12_35','Plano detalhe / close-up'],['uc12_36','Plongê'],['uc12_37','Contra-plongê'],['uc12_38','Zenital'],['uc12_39','Contra zenital'],['uc12_40','Frontal'],['uc12_41','Lateral'],['uc12_42','Traseiro'],['uc12_43','Plano ¾'],['uc12_44','Câmera subjetiva']]]]},
- UC13:{title:'Desenvolver modelagem tridimensional',hours:108,indicators:[],groups:[['Conhecimentos',[['uc13_1','Importação de imagens de referência'],['uc13_2','Modelagem orgânica'],['uc13_3','Modelagem inorgânica'],['uc13_4','Polígono a polígono'],['uc13_5','Escultura de forma primitiva'],['uc13_6','Vértices'],['uc13_7','Arestas'],['uc13_8','Faces'],['uc13_9','Polígonos'],['uc13_10','Sólidos primitivos'],['uc13_11','Modificadores poligonais'],['uc13_12','Edição de malha 3D'],['uc13_13','Cor de material'],['uc13_14','Especular'],['uc13_15','Difuso'],['uc13_16','Reflexão'],['uc13_17','Absorção'],['uc13_18','Refração'],['uc13_19','Transparência'],['uc13_20','Translucidez'],['uc13_21','Opacidade'],['uc13_22','Criação de materiais'],['uc13_23','Edição de materiais'],['uc13_24','Unwrap UV'],['uc13_25','Interface de escultura digital'],['uc13_26','Ferramentas de escultura'],['uc13_27','Modificação de malha'],['uc13_28','Subdivisão de malha'],['uc13_29','Pintura digital'],['uc13_30','Mapas de pintura'],['uc13_31','Exportação de mapas'],['uc13_32','Composição de mapeamento'],['uc13_33','Técnicas de iluminação'],['uc13_34','Aplicação de iluminação'],['uc13_35','Manipulação de iluminação'],['uc13_36','Luz solar'],['uc13_37','Luz ambiente'],['uc13_38','Luz hemisférica'],['uc13_39','Luz de lâmpada'],['uc13_40','Luz focal']]]]},
- UC14:{title:'Animar elemento tridimensional',hours:108,indicators:[],groups:[['Conhecimentos',[['uc14_1','Rigging: conceitos'],['uc14_2','Skinning: conceitos'],['uc14_3','Hierarquia'],['uc14_4','Joints'],['uc14_5','Bones'],['uc14_6','Aplicações de rigging'],['uc14_7','Deformadores: tipos'],['uc14_8','Aplicações de deformadores'],['uc14_9','Técnicas de animação 3D'],['uc14_10','Frame line'],['uc14_11','Poses'],['uc14_12','Backups'],['uc14_13','Workflow'],['uc14_14','Keyframes'],['uc14_15','Editor gráfico de curvas'],['uc14_16','Aplicações de câmera'],['uc14_17','Configurações de câmera'],['uc14_18','Movimentação de câmera']]]]},
- UC15:{title:'Tratar renderização de animação',hours:36,indicators:[],groups:[['Conhecimentos',[['uc15_1','Configurações de renderização'],['uc15_2','Motores de render'],['uc15_3','Passes de render'],['uc15_4','Imagem still: composição'],['uc15_5','Imagem still: finalização'],['uc15_6','Imagem still: formato'],['uc15_7','Animação 3D: composição'],['uc15_8','Animação 3D: finalização'],['uc15_9','Animação 3D: formato'],['uc15_10','Mesclagem de vídeo'],['uc15_11','Aplicação de áudio'],['uc15_12','Correção de cor'],['uc15_13','Coloração'],['uc15_14','Sequência de imagens'],['uc15_15','Configurações de mídias'],['uc15_16','Proporção da tela'],['uc15_17','Aplicação de efeitos'],['uc15_18','Exportação']]]]},
- UC16:{title:'Projeto Integrador Assistente de Produção 3D',hours:20,indicators:[],groups:[]},
- UC17:{title:'Desenhar projeto técnico bidimensional',hours:48,indicators:[],groups:[['Conhecimentos',[['uc17_1','Briefing: objetivos e metas'],['uc17_2','Orçamento e prazos'],['uc17_3','Público alvo'],['uc17_4','Escopo do projeto'],['uc17_5','Conceito de desenho técnico'],['uc17_6','Normas técnicas ABNT'],['uc17_7','Plantas baixas'],['uc17_8','Vistas ortogonais'],['uc17_9','Cortes'],['uc17_10','Prancha de desenho'],['uc17_11','Carimbo'],['uc17_12','Leitura e interpretação'],['uc17_13','Gerenciamento de arquivos'],['uc17_14','Nomeação'],['uc17_15','Edição'],['uc17_16','Versionamento'],['uc17_17','Backup'],['uc17_18','Criação de objetos CAD'],['uc17_19','Layers'],['uc17_20','Agrupamento'],['uc17_21','Inserção'],['uc17_22','Criação de blocos'],['uc17_23','Edição de blocos'],['uc17_24','XREF'],['uc17_25','Cotas'],['uc17_26','Textos'],['uc17_27','Linhas de chamada'],['uc17_28','Planilhas'],['uc17_29','Escalas'],['uc17_30','Configuração de folha'],['uc17_31','Plotagem'],['uc17_32','Fechamento em PDF']]]]},
- UC18:{title:'Desenvolver projeto tridimensional',hours:84,indicators:[],groups:[['Conhecimentos',[['uc18_1','Importação de DWG'],['uc18_2','Imagens bitmap de referência'],['uc18_3','Configuração de saída'],['uc18_4','Organização de layers'],['uc18_5','Vértices'],['uc18_6','Arestas'],['uc18_7','Faces'],['uc18_8','Polígonos'],['uc18_9','Sólidos primitivos'],['uc18_10','Modelagem inorgânica'],['uc18_11','Modificadores poligonais'],['uc18_12','Edição de modelagem 3D'],['uc18_13','Técnicas de iluminação'],['uc18_14','Aplicação de iluminação'],['uc18_15','Manipulação de iluminação'],['uc18_16','Configurações de iluminação'],['uc18_17','Criação de materiais'],['uc18_18','Aplicação de materiais'],['uc18_19','Configuração de materiais'],['uc18_20','Criação de texturas'],['uc18_21','Aplicação de texturas'],['uc18_22','Configuração de texturas'],['uc18_23','Edição de câmeras'],['uc18_24','Configuração de câmeras'],['uc18_25','Movimentação de câmeras'],['uc18_26','Passeio virtual'],['uc18_27','Composição de cena'],['uc18_28','Importação de objetos 3D'],['uc18_29','Exportação de objetos 3D'],['uc18_30','Conceito de render'],['uc18_31','Configurações de render'],['uc18_32','Motores de render'],['uc18_33','CPU x GPU'],['uc18_34','Formatos de render'],['uc18_35','Passes de render']]]]},
- UC19:{title:'Tratar imagem para maquete eletrônica',hours:36,indicators:[],groups:[['Conhecimentos',[['uc19_1','Alpha channel'],['uc19_2','Color balance'],['uc19_3','Screen'],['uc19_4','Render elements'],['uc19_5','Occlusion'],['uc19_6','Z-depth'],['uc19_7','Canal diffuse'],['uc19_8','Correção de cores'],['uc19_9','Seleção'],['uc19_10','Edição de imagem'],['uc19_11','Configuração de camada'],['uc19_12','Mesclagem de camada'],['uc19_13','Filtros'],['uc19_14','Efeitos'],['uc19_15','Exportação'],['uc19_16','Formato de arquivo']]]]},
- UC20:{title:'Projeto Integrador Desenhista de Maquete Eletrônica',hours:16,indicators:[],groups:[]}
-
-};
+<div class="head"><div>Marcar</div><div>Aula</div><div>UC</div><div>Dia da aula</div><div>Professor</div><div>Sala</div><div>Planejamento</div><div>Ações</div></div><div id="lessons"></div></section>
+</main>
+<footer style="text-align:center;padding:8px 20px 28px;color:#697386;font-size:12px">Desenvolvido por Hugo Duarte Tockaes, 2026. &nbsp;•&nbsp; Versão 1.1</footer>
+<script>
+let UCS={};
 let drag=null,origin=null;
 let activeUC='UC1';
 const lessons=document.getElementById('lessons');
@@ -194,32 +189,653 @@ function duplicateLesson(source){
  copy.querySelector('.date').value=source.querySelector('.date').value;
  copy.querySelector('.prof').value=source.querySelector('.prof').value;
  copy.querySelector('.room').value=source.querySelector('.room').value;
+ copy.querySelector('.notes').value=source.querySelector('.notes')?.value||'';
+  copy.querySelector('.lesson-check').checked=source.querySelector('.lesson-check')?.checked||false;
+  copy.querySelector('.realized').checked=source.querySelector('.realized')?.checked||false;
+  copy.querySelector('.cancelled').checked=source.querySelector('.cancelled')?.checked||false;
+  copy.querySelector('.pending').checked=source.querySelector('.pending')?.checked||false;
+  if(copy.querySelector('.realized').checked){
+    const b=copy.querySelector('.realized-btn');
+    b.style.background='#167b5b'; b.style.color='#fff'; b.title='Aula realizada';
+  }
+  if(copy.querySelector('.cancelled').checked){
+    const b=copy.querySelector('.cancelled-btn');
+    b.style.background='#c85b5b'; b.style.color='#fff'; b.title='Aula cancelada';
+  }
+  if(copy.querySelector('.pending').checked){
+    const b=copy.querySelector('.pending-btn');
+    b.style.background='#d59a35'; b.style.color='#fff'; b.title='Aula pendente';
+  }
  [...source.querySelectorAll('.placed')].forEach(x=>put(copy.querySelector('.drop'),x.dataset.id,x.querySelector('span').textContent));
- source.after(copy); renumberLessons(); renderUC();
+ source.after(copy); renumberLessons(); checkDateConflicts(); renderUC();
 }
 function addLesson(uc=activeUC){
- const r=document.createElement('div');r.className='lesson';
- r.innerHTML=`<div class="lesson-number"></div><select class="lesson-uc"><option>UC1</option><option>UC2</option><option>UC3</option><option>UC4</option><option>UC5</option><option>UC6</option><option>UC7</option><option>UC8</option><option>UC9</option><option>UC10</option><option>UC11</option><option>UC12</option><option>UC13</option><option>UC14</option><option>UC15</option><option>UC16</option><option>UC17</option><option>UC18</option><option>UC19</option><option>UC20</option></select><input class="date" type="date">
- <select class="prof"><option value="">Selecione</option><option>Hugo</option><option>Mariana</option><option>Stefanie</option><option>Convidado</option></select>
- <input class="room" type="text" placeholder="Sala">
- <div class="drop"></div><div class="actions"><button class="dup" title="Duplicar aula" type="button">⧉</button><button class="del" title="Excluir aula" type="button">×</button></div>`;
- r.querySelector('.lesson-uc').value=uc;applyLessonUC(r,uc);setup(r.querySelector('.drop'));
- r.querySelector('.lesson-uc').onchange=e=>{
-  const newUC=e.target.value, bad=[...r.querySelectorAll('.placed')].some(x=>itemInfo(x.dataset.id)?.uc!==newUC);
-  if(bad){
-   alert('Remova primeiro os conhecimentos da UC anterior desta aula.');
-   e.target.value=[...r.querySelectorAll('.placed')][0] ? itemInfo(r.querySelector('.placed').dataset.id).uc : newUC;
+  if(!UCS[uc]){
+    alert('Carregue primeiro um XML de Curso.');
+    return;
   }
-  applyLessonUC(r,e.target.value);
- };
- r.querySelector('.dup').onclick=()=>duplicateLesson(r);
- r.querySelector('.del').onclick=()=>{r.remove();renumberLessons();renderUC()};
- lessons.appendChild(r);
- const now=new Date();
- const localToday=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
- r.querySelector('.date').value=localToday;
- enableLessonSorting(r);renumberLessons()
+
+  const r=document.createElement('div');
+  r.className='lesson';
+
+  const ucOptions=Object.keys(UCS)
+    .sort((a,b)=>(parseInt(a.replace('UC',''))||0)-(parseInt(b.replace('UC',''))||0))
+    .map(k=>`<option>${k}</option>`).join('');
+
+  r.innerHTML=`
+    <div style="display:flex;align-items:center;justify-content:center">
+      <input class="lesson-check" type="checkbox" title="Selecionar aula" onchange="if(uncheckedHidden&&!this.checked)this.closest('.lesson').style.display='none'">
+    </div>
+    <div class="lesson-number"></div>
+    <select class="lesson-uc">${ucOptions}</select>
+    <input class="date" type="date">
+    <select class="prof">
+      <option value="">Selecione</option>
+      <option>Hugo</option>
+      <option>Mariana</option>
+      <option>Stefanie</option>
+      <option>Convidado</option>
+    </select>
+    <input class="room" type="text" placeholder="Sala">
+    <div class="drop"></div>
+    <textarea class="notes" rows="2" placeholder="Observações" title="Observações da aula" style="resize:vertical;min-height:42px"></textarea>
+    <div class="actions">
+      <button class="dup realized-btn" title="Marcar como realizada" type="button">✓</button>
+      <input class="realized" type="checkbox" hidden>
+      <button class="dup cancelled-btn" title="Marcar aula como cancelada" type="button">C</button>
+      <input class="cancelled" type="checkbox" hidden>
+      <button class="dup pending-btn" title="Marcar aula como pendente" type="button">P</button>
+      <input class="pending" type="checkbox" hidden>
+      <button class="dup duplicate-btn" title="Duplicar aula" type="button">⧉</button>
+      <button class="del" title="Excluir aula" type="button">×</button>
+    </div>`;
+
+  r.querySelector('.lesson-uc').value=uc;
+  applyLessonUC(r,uc);
+  setup(r.querySelector('.drop'));
+
+  r.querySelector('.lesson-uc').onchange=e=>{
+    const newUC=e.target.value;
+    const placed=[...r.querySelectorAll('.placed')];
+    const bad=placed.some(x=>itemInfo(x.dataset.id)?.uc!==newUC);
+    if(bad){
+      alert('Remova primeiro os conhecimentos da UC anterior desta aula.');
+      e.target.value=placed[0] ? itemInfo(placed[0].dataset.id).uc : newUC;
+    }
+    applyLessonUC(r,e.target.value);
+  };
+
+  const realizedBtn=r.querySelector('.realized-btn');
+  const realizedCheck=r.querySelector('.realized');
+
+  function syncRealized(){
+    const on=realizedCheck.checked;
+    realizedBtn.style.background=on?'#167b5b':'#e9eefc';
+    realizedBtn.style.color=on?'#fff':'#3157d5';
+    realizedBtn.title=on?'Aula realizada':'Marcar como realizada';
+  }
+
+  realizedBtn.onclick=()=>{
+    realizedCheck.checked=!realizedCheck.checked;
+    syncRealized();
+  };
+
+  const cancelledBtn=r.querySelector('.cancelled-btn');
+  const cancelledCheck=r.querySelector('.cancelled');
+  function syncCancelled(){
+    const on=cancelledCheck.checked;
+    cancelledBtn.style.background=on?'#c85b5b':'#e9eefc';
+    cancelledBtn.style.color=on?'#fff':'#3157d5';
+    cancelledBtn.title=on?'Aula cancelada':'Marcar aula como cancelada';
+  }
+  cancelledBtn.onclick=()=>{
+    cancelledCheck.checked=!cancelledCheck.checked;
+    syncCancelled();
+  };
+
+  const pendingBtn=r.querySelector('.pending-btn');
+  const pendingCheck=r.querySelector('.pending');
+  function syncPending(){
+    const on=pendingCheck.checked;
+    pendingBtn.style.background=on?'#d59a35':'#e9eefc';
+    pendingBtn.style.color=on?'#fff':'#3157d5';
+    pendingBtn.title=on?'Aula pendente':'Marcar aula como pendente';
+  }
+  pendingBtn.onclick=()=>{
+    pendingCheck.checked=!pendingCheck.checked;
+    syncPending();
+  };
+
+  r.querySelector('.duplicate-btn').onclick=()=>duplicateLesson(r);
+  r.querySelector('.del').onclick=()=>{
+    r.remove();
+    renumberLessons();
+    checkDateConflicts();
+    renderUC();
+  };
+
+  lessons.appendChild(r);
+
+  const now=new Date();
+  const localToday=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+  r.querySelector('.date').value=localToday;
+  r.querySelector('.date').addEventListener('change',()=>{
+    checkDateConflicts();
+  });
+  r.querySelector('.date').addEventListener('input',()=>{
+    checkDateConflicts();
+  });
+
+  enableLessonSorting(r);
+  syncRealized();
+  syncCancelled();
+  syncPending();
+  renumberLessons();
+  if(uncheckedHidden && !r.querySelector('.lesson-check').checked)r.style.display='none';
+  checkDateConflicts();
 }
+
+let uncheckedHidden=false;
+function parsePlanningFile(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>{
+      const doc=new DOMParser().parseFromString(reader.result,'application/xml');
+      if(doc.querySelector('parsererror')){reject(new Error('XML inválido: '+file.name));return;}
+      const aulas=[...doc.querySelectorAll('aula')].map((a,i)=>({
+        source:file.name,
+        order:i,
+        uc:a.getAttribute('uc')||'UC1',
+        selected:a.getAttribute('selecionada')==='sim',
+        realized:a.getAttribute('realizada')==='sim',
+        cancelled:a.getAttribute('cancelada')==='sim',
+        pending:a.getAttribute('pendente')==='sim',
+        date:a.querySelector('data')?.textContent||'',
+        prof:a.querySelector('professor')?.textContent||'',
+        room:a.querySelector('sala')?.textContent||'',
+        notes:a.querySelector('observacoes')?.textContent||'',
+        knowledge:[...a.querySelectorAll('conhecimento')].map(c=>({id:c.getAttribute('id')||'',text:c.textContent||''}))
+      }));
+      resolve(aulas);
+    };
+    reader.onerror=()=>reject(new Error('Não foi possível ler '+file.name));
+    reader.readAsText(file,'UTF-8');
+  });
+}
+
+function importCombinedLesson(a){
+  if(!UCS[a.uc]) return false;
+  addLesson(a.uc);
+  const r=lessons.lastElementChild;
+  r.querySelector('.date').value=a.date||'';
+  const prof=r.querySelector('.prof');
+  if(a.prof && ![...prof.options].some(o=>o.value===a.prof)) prof.add(new Option(a.prof,a.prof));
+  prof.value=a.prof||'';
+  r.querySelector('.room').value=a.room||'';
+  r.querySelector('.notes').value=a.notes||'';
+  r.querySelector('.lesson-check').checked=!!a.selected;
+  r.querySelector('.realized').checked=!!a.realized;
+  r.querySelector('.cancelled').checked=!!a.cancelled;
+  r.querySelector('.pending').checked=!!a.pending;
+  if(a.realized){const b=r.querySelector('.realized-btn');b.style.background='#167b5b';b.style.color='#fff';b.title='Aula realizada';}
+  if(a.cancelled){const b=r.querySelector('.cancelled-btn');b.style.background='#c85b5b';b.style.color='#fff';b.title='Aula cancelada';}
+  if(a.pending){const b=r.querySelector('.pending-btn');b.style.background='#d59a35';b.style.color='#fff';b.title='Aula pendente';}
+  a.knowledge.forEach(k=>{if(itemInfo(k.id))put(r.querySelector('.drop'),k.id,k.text)});
+  checkDateConflicts();
+  return true;
+}
+
+function openCombineData(){
+  const win=window.open('','_blank','width=1120,height=780,scrollbars=yes,resizable=yes');
+  if(!win){alert('O navegador bloqueou a janela de combinação. Permita pop-ups e tente novamente.');return;}
+  win.document.open();
+  win.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Adicionar dados</title>
+  <style>
+  *{box-sizing:border-box}body{margin:0;background:#f4f6f9;color:#172033;font-family:Arial,sans-serif}
+  header{background:#17233f;color:#fff;padding:24px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px}
+  main{width:min(1200px,92%);margin:24px auto}.box{background:#fff;border:1px solid #dde3ec;border-radius:14px;padding:18px;margin-bottom:18px}
+  .files{display:grid;grid-template-columns:1fr 1fr;gap:14px}.filebox{border:1px dashed #aeb8ca;border-radius:10px;padding:15px}
+  button{background:#3157d5;color:#fff;border:0;border-radius:8px;padding:10px 14px;font-weight:bold;cursor:pointer}.danger{background:#a95151}.secondary{background:#68758a}
+  table{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:10px;border-bottom:1px solid #e2e7ee;text-align:left;vertical-align:top}th{background:#eef1f7}
+  .conflict{background:#fff0f0}.ok{color:#167b5b}.warn{color:#a95151}.muted{color:#758095}
+  @media(max-width:700px){.files{grid-template-columns:1fr}}
+  </style></head><body>
+  <header><div><h1 style="margin:0">Adicionar dados</h1><div style="opacity:.75;margin-top:5px">Analise os planejamentos e escolha a informação correta antes de adicionar os dados</div></div><button onclick="window.close()">← Voltar ao cronograma</button></header>
+  <main>
+    <section class="box">
+      <div class="files">
+        <div class="filebox"><b>Cronograma 1</b><p class="muted">Selecione um XML de planejamento.</p><input id="f1" type="file" accept=".xml,text/xml"></div>
+        <div class="filebox"><b>Cronograma 2</b><p class="muted">Selecione outro XML de planejamento.</p><input id="f2" type="file" accept=".xml,text/xml"></div>
+      </div>
+      <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap"><button onclick="compareFiles()">Analisar dados</button></div>
+      <div id="summary" style="margin-top:12px"></div>
+    </section>
+    <section id="results" class="box" style="display:none"><h2 style="margin-top:0">Comparação</h2><div id="resultBody"></div></section>
+  </main>
+  <footer style="text-align:center;padding:8px 20px 28px;color:#697386;font-size:12px">Desenvolvido por Hugo Duarte Tockaes, 2026. • Versão 1.1</footer>
+  <script>
+  let imported=[], conflicts=[], accepted=new Set(), rejected=new Set();
+
+  function esc(v){return String(v??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+  function br(v){if(!v)return 'Sem data';const p=v.split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:v}
+
+  async function compareFiles(){
+    const a=document.getElementById('f1').files[0],b=document.getElementById('f2').files[0];
+    const summary=document.getElementById('summary');
+    if(!a||!b){summary.innerHTML='<span class="warn">Carregue os dois cronogramas antes de analisar.</span>';return;}
+    try{
+      const sets=await Promise.all([window.opener.parsePlanningFile(a),window.opener.parsePlanningFile(b)]);
+      imported=sets.flat().map((x,i)=>({...x,_id:i}));
+      accepted=new Set(); rejected=new Set();
+
+      const current=[...window.opener.document.querySelectorAll('.lesson')].map((r,i)=>({
+        source:'Cronograma atual',_id:'current-'+i,date:r.querySelector('.date')?.value||'',uc:r.querySelector('.lesson-uc')?.value||'',prof:r.querySelector('.prof')?.value||''
+      }));
+      const byDate={};
+      [...current,...imported].filter(x=>x.date).forEach(x=>(byDate[x.date]??=[]).push(x));
+      conflicts=Object.entries(byDate).filter(([d,list])=>{
+        const incoming=list.filter(x=>typeof x._id==='number');
+        return incoming.length && list.length>1;
+      }).map(([date,list])=>({date,list}));
+
+      document.getElementById('results').style.display='block';
+      summary.innerHTML=conflicts.length
+        ? '<div class="warn"><b>Análise concluída:</b> '+imported.length+' aula(s) encontradas e <b>'+conflicts.length+' inconsistência(s) de data</b>. Marque abaixo qual registro deve prevalecer em cada conflito.</div>'
+        : '<div class="ok"><b>Análise concluída:</b> '+imported.length+' aula(s) encontradas. Nenhuma inconsistência de data foi identificada.</div>';
+      render();
+    }catch(e){summary.innerHTML='<span class="warn">'+esc(e.message)+'</span>'}
+  }
+
+  function render(){
+    const conflictIds=new Set(conflicts.flatMap(c=>c.list.filter(x=>typeof x._id==='number').map(x=>x._id)));
+    imported.forEach(x=>{
+      if(!conflictIds.has(x._id) && !rejected.has(x._id)) accepted.add(x._id);
+    });
+
+    let html='';
+    if(!conflicts.length){
+      html='<p class="ok"><b>Nenhuma inconsistência encontrada.</b> Os dados podem ser adicionados ao cronograma.</p>';
+    }
+
+    conflicts.forEach((c,ci)=>{
+      const chosen=[...accepted].find(id=>c.list.some(x=>x._id===id));
+      html+='<div class="conflict" style="border:1px solid #e5b1b1;border-radius:10px;padding:14px;margin-bottom:12px">'+
+        '<div style="margin-bottom:10px"><b>'+br(c.date)+'</b><div class="muted">Existe mais de um registro para esta data. Marque qual informação está correta.</div></div>'+
+        '<table><thead><tr><th>Escolher</th><th>Origem</th><th>UC</th><th>Docente</th><th>Situação</th></tr></thead><tbody>'+
+        c.list.map((x,ri)=>{
+          const isCurrent=typeof x._id!=='number';
+          const key=isCurrent?String(x._id):String(x._id);
+          const checked=chosen===x._id;
+          return '<tr><td><input type="checkbox" '+(checked?'checked ':'')+'onchange="chooseConflict('+ci+','+ri+',this.checked)"></td>'+
+            '<td>'+esc(x.source)+'</td><td>'+esc(x.uc)+'</td><td>'+esc(x.prof)+'</td>'+
+            '<td>'+(checked?'<span class="ok"><b>Informação escolhida</b></span>':isCurrent?'Já está no cronograma':'Aguardando escolha')+'</td></tr>';
+        }).join('')+
+        '</tbody></table></div>';
+    });
+
+    const unresolved=conflicts.some(c=>!c.list.some(x=>accepted.has(x._id)));
+    html+='<div style="margin-top:18px;border-top:1px solid #dde3ec;padding-top:16px">'+
+      '<b>'+accepted.size+'</b> registro(s) selecionado(s) para adicionar. '+
+      (unresolved?'<span class="warn">Escolha uma informação em cada inconsistência.</span>':'<span class="ok">Análise concluída. Todas as inconsistências possuem uma escolha.</span>')+
+      '<br><br><button '+(unresolved?'disabled style="opacity:.45"':'')+' onclick="applyMerge()">Adicionar dados ao cronograma</button></div>';
+
+    document.getElementById('resultBody').innerHTML=html;
+  }
+
+  function chooseConflict(ci,ri,on){
+    const conflict=conflicts[ci];
+    if(!conflict)return;
+    const chosen=conflict.list[ri];
+    if(!chosen)return;
+
+    // One choice per conflicting date. Checkboxes behave as an explicit choice group.
+    conflict.list.forEach(x=>{
+      if(typeof x._id==='number'){
+        accepted.delete(x._id);
+        rejected.add(x._id);
+      }
+    });
+
+    if(on){
+      if(typeof chosen._id==='number'){
+        accepted.add(chosen._id);
+        rejected.delete(chosen._id);
+      }else{
+        // Choosing the current record means no incoming record for that date is added.
+        conflict._keepCurrent=true;
+      }
+    }else{
+      conflict._keepCurrent=false;
+    }
+
+    // Track choosing current row separately, since it is not imported.
+    conflict._chosenKey=on?chosen._id:null;
+    renderConflictChoices();
+  }
+
+  function renderConflictChoices(){
+    // Re-render while respecting a current-cronograma choice.
+    conflicts.forEach(c=>{
+      if(c._chosenKey && typeof c._chosenKey!=='number'){
+        c.list.filter(x=>typeof x._id==='number').forEach(x=>{accepted.delete(x._id);rejected.add(x._id)});
+      }
+    });
+
+    let html='';
+    if(!conflicts.length){
+      html='<p class="ok"><b>Nenhuma inconsistência encontrada.</b> Os dados podem ser adicionados ao cronograma.</p>';
+    }
+
+    conflicts.forEach((c,ci)=>{
+      html+='<div class="conflict" style="border:1px solid #e5b1b1;border-radius:10px;padding:14px;margin-bottom:12px">'+
+        '<div style="margin-bottom:10px"><b>'+br(c.date)+'</b><div class="muted">Existe mais de um registro para esta data. Marque qual informação está correta.</div></div>'+
+        '<table><thead><tr><th>Escolher</th><th>Origem</th><th>UC</th><th>Docente</th><th>Situação</th></tr></thead><tbody>'+
+        c.list.map((x,ri)=>{
+          const checked=c._chosenKey===x._id;
+          return '<tr><td><input type="checkbox" '+(checked?'checked ':'')+'onchange="chooseConflict('+ci+','+ri+',this.checked)"></td>'+
+            '<td>'+esc(x.source)+'</td><td>'+esc(x.uc)+'</td><td>'+esc(x.prof)+'</td>'+
+            '<td>'+(checked?'<span class="ok"><b>Informação escolhida</b></span>':(typeof x._id!=='number'?'Já está no cronograma':'Aguardando escolha'))+'</td></tr>';
+        }).join('')+
+        '</tbody></table></div>';
+    });
+
+    const unresolved=conflicts.some(c=>c._chosenKey===undefined || c._chosenKey===null);
+    html+='<div style="margin-top:18px;border-top:1px solid #dde3ec;padding-top:16px">'+
+      '<b>'+accepted.size+'</b> registro(s) selecionado(s) para adicionar. '+
+      (unresolved?'<span class="warn">Escolha uma informação em cada inconsistência.</span>':'<span class="ok">Análise concluída. Todas as inconsistências possuem uma escolha.</span>')+
+      '<br><br><button '+(unresolved?'disabled style="opacity:.45"':'')+' onclick="applyMerge()">Adicionar dados ao cronograma</button></div>';
+    document.getElementById('resultBody').innerHTML=html;
+  }
+
+  function applyMerge(){
+    const unresolved=conflicts.some(c=>c._chosenKey===undefined || c._chosenKey===null);
+    if(unresolved){alert('Escolha a informação correta em todas as inconsistências antes de adicionar os dados.');return;}
+    const chosen=imported.filter(x=>accepted.has(x._id));
+    let added=0;
+    chosen.forEach(x=>{if(window.opener.importCombinedLesson(x))added++});
+    window.opener.renumberLessons();window.opener.checkDateConflicts();window.opener.renderUC();
+    document.getElementById('summary').innerHTML='<span class="ok"><b>'+added+' aula(s) adicionadas ao cronograma.</b></span>';
+    document.getElementById('resultBody').innerHTML='<p class="ok"><b>Dados adicionados.</b> Volte ao cronograma para revisar o resultado.</p>';
+  }
+  <\/script></body></html>`);
+  win.document.close();
+}
+
+function organizeDates(){
+  const rows=[...lessons.querySelectorAll('.lesson')];
+  if(rows.length<2)return;
+
+  rows.sort((a,b)=>{
+    const da=a.querySelector('.date')?.value||'';
+    const db=b.querySelector('.date')?.value||'';
+
+    // Rows without a date always go to the end.
+    if(!da && !db)return 0;
+    if(!da)return 1;
+    if(!db)return -1;
+
+    const byDate=da.localeCompare(db);
+    if(byDate!==0)return byDate;
+
+    // Same date: preserve the current visual order.
+    return 0;
+  });
+
+  rows.forEach(r=>lessons.appendChild(r));
+  renumberLessons();
+  checkDateConflicts();
+  renderUC();
+}
+
+function openActions(){
+  document.querySelectorAll('.lesson[data-action-index]').forEach(r=>delete r.dataset.actionIndex);
+  const selected=[...document.querySelectorAll('.lesson')].filter(r=>r.querySelector('.lesson-check')?.checked);
+  selected.forEach((r,i)=>r.dataset.actionIndex=String(i));
+  if(!selected.length){
+    alert('Marque pelo menos uma aula para abrir Ações.');
+    return;
+  }
+
+  const courseName=document.getElementById('courseTitle')?.value||'Curso';
+  const allTeachers=[...new Set(
+    [...document.querySelectorAll('.prof option')].map(o=>o.value.trim()).filter(Boolean)
+      .concat([...document.querySelectorAll('.prof')].map(sel=>sel.value.trim()).filter(Boolean))
+  )].sort((a,b)=>a.localeCompare(b,'pt-BR'));
+  const rows=selected.map((r,i)=>{
+    const uc=r.querySelector('.lesson-uc')?.value||'';
+    const date=formatDateBR(r.querySelector('.date')?.value||'');
+    const prof=r.querySelector('.prof')?.value||'';
+    const room=r.querySelector('.room')?.value||'';
+    const notes=r.querySelector('.notes')?.value||'';
+    const realized=r.querySelector('.realized')?.checked;
+    const knowledge=[...r.querySelectorAll('.placed span')].map(x=>x.textContent).join(' • ');
+    return `<tr data-action-index="${i}">
+      <td>${i+1}</td>
+      <td><b>${uc}</b></td>
+      <td class="action-date">${date}</td>
+      <td>${prof}</td>
+      <td>${room}</td>
+      <td>${realized?'Sim':'Não'}</td>
+      <td>${notes||'<span class="muted">—</span>'}</td>
+      <td>${knowledge||'<span class="muted">Sem conhecimentos adicionados</span>'}</td>
+    </tr>`;
+  }).join('');
+
+  const win=window.open('','_blank','width=1200,height=780,scrollbars=yes,resizable=yes');
+  if(!win){
+    alert('O navegador bloqueou a janela de Ações. Permita pop-ups e tente novamente.');
+    return;
+  }
+
+  win.document.open();
+  win.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ações — ${courseName}</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:#f4f6f9;color:#172033;font-family:Arial,sans-serif}
+    header{background:#17233f;color:#fff;padding:26px 5%;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+    header h1{margin:0 0 5px;font-size:26px}
+    header p{margin:0;opacity:.78}
+    main{width:min(1400px,92%);margin:25px auto}
+    .box{background:#fff;border:1px solid #dde3ec;border-radius:15px;padding:20px;box-shadow:0 6px 20px #0000000d;overflow:auto}
+    button{background:#3157d5;color:#fff;border:0;border-radius:8px;padding:11px 16px;font-weight:bold;cursor:pointer}
+    table{width:100%;border-collapse:collapse;min-width:950px}
+    th,td{padding:12px 10px;border-bottom:1px solid #e3e7ed;text-align:left;vertical-align:top;font-size:14px}
+    th{background:#eef1f7;color:#526075;font-size:12px;text-transform:uppercase}
+    .muted{color:#9ba5b4}
+    footer{text-align:center;padding:8px 20px 28px;color:#697386;font-size:12px}
+  </style></head><body>
+  <header>
+    <div><h1>Ações</h1><p>${courseName} • ${selected.length} aula(s) marcada(s)</p></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button onclick="document.getElementById('datePanel').style.display=document.getElementById('datePanel').style.display==='none'?'flex':'none'">Ajustar datas</button>
+      <button onclick="document.getElementById('teacherPanel').style.display=document.getElementById('teacherPanel').style.display==='none'?'flex':'none'">Trocar docente em lote</button>
+      <button onclick="window.close()">← Voltar ao cronograma</button>
+    </div>
+  </header>
+  <main>
+    <section id="datePanel" class="box" style="display:none;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:18px">
+      <div>
+        <label style="display:block;font-size:12px;font-weight:bold;color:#697386;margin-bottom:6px">DATA DE INÍCIO</label>
+        <input id="startDate" type="date" style="padding:10px;border:1px solid #d9dfe8;border-radius:8px">
+      </div>
+      <div>
+        <label style="display:block;font-size:12px;font-weight:bold;color:#697386;margin-bottom:6px">DATA FINAL</label>
+        <input id="endDate" type="date" style="padding:10px;border:1px solid #d9dfe8;border-radius:8px">
+      </div>
+      <div style="width:100%;padding-top:4px">
+        <label style="display:block;font-size:12px;font-weight:bold;color:#697386;margin-bottom:8px">DIAS DA SEMANA COM AULA</label>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:14px">
+          <label><input class="weekday" type="checkbox" value="1" checked> Segunda</label>
+          <label><input class="weekday" type="checkbox" value="2" checked> Terça</label>
+          <label><input class="weekday" type="checkbox" value="3" checked> Quarta</label>
+          <label><input class="weekday" type="checkbox" value="4" checked> Quinta</label>
+          <label><input class="weekday" type="checkbox" value="5" checked> Sexta</label>
+          <label><input class="weekday" type="checkbox" value="6"> Sábado</label>
+          <label><input class="weekday" type="checkbox" value="0"> Domingo</label>
+        </div>
+      </div>
+      <button onclick="applyDates()">Executar</button>
+      <span id="dateMsg" style="font-size:13px;color:#697386"></span>
+    </section>
+    <section id="teacherPanel" class="box" style="display:none;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:18px">
+      <div>
+        <label style="display:block;font-size:12px;font-weight:bold;color:#697386;margin-bottom:6px">NOVO DOCENTE</label>
+        <select id="batchTeacher" style="padding:10px;border:1px solid #d9dfe8;border-radius:8px">
+          <option value="">Selecione...</option>
+          ${allTeachers.map(p=>'<option value="'+String(p).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'">'+String(p).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</option>').join('')}
+          <option value="__outro__">+ Adicionar outro docente...</option>
+        </select>
+      </div>
+      <div id="newTeacherWrap" style="display:none">
+        <label style="display:block;font-size:12px;font-weight:bold;color:#697386;margin-bottom:6px">NOME DO NOVO DOCENTE</label>
+        <input id="newTeacher" type="text" placeholder="Digite o nome" style="padding:10px;border:1px solid #d9dfe8;border-radius:8px">
+      </div>
+      <button onclick="applyTeacher()">Aplicar docente</button>
+      <span id="teacherMsg" style="font-size:13px;color:#697386"></span>
+    </section>
+    <section class="box">
+    <table>
+      <thead><tr><th>#</th><th>UC</th><th>Data</th><th>Professor</th><th>Sala</th><th>Realizada</th><th>Observações</th><th>Planejamento</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </section></main>
+  <footer>Desenvolvido por Hugo Duarte Tockaes, 2026. &nbsp;•&nbsp; Versão 1.1</footer>
+  <script>
+    function localISO(d){
+      const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');
+      return y+'-'+m+'-'+day;
+    }
+    function br(iso){
+      if(!iso)return '';
+      const p=iso.split('-'); return p[2]+'/'+p[1]+'/'+p[0];
+    }
+    const batchTeacher=document.getElementById('batchTeacher');
+    batchTeacher.addEventListener('change',()=>{
+      document.getElementById('newTeacherWrap').style.display=batchTeacher.value==='__outro__'?'block':'none';
+    });
+
+    function applyTeacher(){
+      let teacher=document.getElementById('batchTeacher').value;
+      const msg=document.getElementById('teacherMsg');
+      if(teacher==='__outro__') teacher=document.getElementById('newTeacher').value.trim();
+      if(!teacher){msg.textContent='Selecione ou informe um docente.';return;}
+      if(!window.opener || window.opener.closed){msg.textContent='O cronograma original não está mais aberto.';return;}
+      const rows=[...window.opener.document.querySelectorAll('.lesson[data-action-index]')]
+        .sort((a,b)=>Number(a.dataset.actionIndex)-Number(b.dataset.actionIndex));
+      [...window.opener.document.querySelectorAll('.prof')].forEach(sel=>{
+        if(![...sel.options].some(o=>o.value===teacher)) sel.add(new Option(teacher,teacher));
+      });
+      rows.forEach((r,i)=>{
+        const sel=r.querySelector('.prof');
+        if(sel){
+          let opt=[...sel.options].find(o=>o.value===teacher);
+          if(!opt){opt=new Option(teacher,teacher);sel.add(opt);}
+          sel.value=teacher;
+        }
+        const actionRow=document.querySelector('tr[data-action-index="'+i+'"]');
+        if(actionRow) actionRow.children[3].textContent=teacher;
+      });
+      msg.textContent=rows.length+' aula(s) atualizada(s) para '+teacher+'.';
+    }
+
+    function applyDates(){
+      const start=document.getElementById('startDate').value;
+      const end=document.getElementById('endDate').value;
+      const msg=document.getElementById('dateMsg');
+      if(!start||!end){msg.textContent='Informe a data de início e a data final.';return;}
+      const a=new Date(start+'T12:00:00'), b=new Date(end+'T12:00:00');
+      if(b<a){msg.textContent='A data final deve ser igual ou posterior à inicial.';return;}
+      const count=${selected.length};
+      const allowed=[...document.querySelectorAll('.weekday:checked')].map(x=>Number(x.value));
+      if(!allowed.length){msg.textContent='Selecione pelo menos um dia da semana.';return;}
+
+      const available=[];
+      const cursor=new Date(a);
+      while(cursor<=b){
+        if(allowed.includes(cursor.getDay()))available.push(localISO(cursor));
+        cursor.setDate(cursor.getDate()+1);
+      }
+
+      if(available.length<count){
+        msg.textContent='O período possui apenas '+available.length+' data(s) válida(s) para '+count+' aula(s). Amplie o período ou selecione mais dias da semana.';
+        return;
+      }
+
+      const dates=available.slice(0,count);
+
+      if(!window.opener || window.opener.closed){
+        msg.textContent='O cronograma original não está mais aberto.';
+        return;
+      }
+
+      const openerRows=[...window.opener.document.querySelectorAll('.lesson[data-action-index]')]
+        .sort((x,y)=>Number(x.dataset.actionIndex)-Number(y.dataset.actionIndex));
+
+      if(openerRows.length!==count){
+        msg.textContent='Não foi possível localizar todas as aulas selecionadas no cronograma.';
+        return;
+      }
+
+      openerRows.forEach((r,i)=>{
+        const input=r.querySelector('.date');
+        if(input && dates[i]){
+          input.value=dates[i];
+          input.dispatchEvent(new Event('change',{bubbles:true}));
+        }
+        const cell=document.querySelector('tr[data-action-index="'+i+'"] .action-date');
+        if(cell)cell.textContent=br(dates[i]);
+      });
+
+      if(typeof window.opener.sortLessons==='function') window.opener.sortLessons();
+      if(typeof window.opener.renumberLessons==='function') window.opener.renumberLessons();
+      if(typeof window.opener.checkDateConflicts==='function') window.opener.checkDateConflicts();
+
+      msg.textContent='Datas ajustadas com sucesso: '+count+' aula(s) atualizada(s).';
+    }
+  <\/script>
+  </body></html>`);
+  win.document.close();
+}
+
+function clearSelections(){
+  document.querySelectorAll('.lesson-check').forEach(c=>c.checked=false);
+  if(uncheckedHidden){
+    document.querySelectorAll('.lesson').forEach(r=>r.style.display='none');
+  }
+}
+
+function toggleUnchecked(){
+  uncheckedHidden=!uncheckedHidden;
+  [...document.querySelectorAll('.lesson')].forEach(r=>{
+    const marked=r.querySelector('.lesson-check')?.checked;
+    r.style.display=(uncheckedHidden && !marked)?'none':'';
+  });
+  const b=document.getElementById('hideUncheckedBtn');
+  if(b)b.textContent=uncheckedHidden?'Revelar todos':'Ocultar desmarcados';
+}
+
+function checkDateConflicts(){
+  const rows=[...document.querySelectorAll('.lesson')];
+  const byDate={};
+
+  rows.forEach(r=>{
+    r.classList.remove('date-conflict');
+    r.removeAttribute('data-date-conflict');
+    const d=r.querySelector('.date')?.value;
+    if(!d)return;
+    (byDate[d]??=[]).push(r);
+  });
+
+  Object.values(byDate).forEach(group=>{
+    if(group.length>1)group.forEach(r=>{
+      r.classList.add('date-conflict');
+      r.setAttribute('data-date-conflict','true');
+    });
+  });
+}
+
 function update(){
  const uc=activeUC;
  const total=UCS[uc].groups.flatMap(x=>x[1]).length;
@@ -230,8 +846,8 @@ function escXML(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;
 function saveXML(){
  let xml='<?xml version="1.0" encoding="UTF-8"?>\n<planejamento versao="2">\n  <aulas>\n';
  [...document.querySelectorAll('.lesson')].forEach((r,i)=>{
-  xml+=`    <aula ordem="${i+1}" uc="${r.querySelector('.lesson-uc').value}">\n`;
-  xml+=`      <data>${escXML(r.querySelector('.date').value)}</data>\n      <professor>${escXML(r.querySelector('.prof').value)}</professor>\n      <sala>${escXML(r.querySelector('.room').value)}</sala>\n      <conhecimentos>\n`;
+  xml+=`    <aula ordem="${i+1}" uc="${r.querySelector('.lesson-uc').value}" selecionada="${r.querySelector('.lesson-check')?.checked?'sim':'nao'}" realizada="${r.querySelector('.realized')?.checked?'sim':'nao'}" cancelada="${r.querySelector('.cancelled')?.checked?'sim':'nao'}" pendente="${r.querySelector('.pending')?.checked?'sim':'nao'}">\n`;
+  xml+=`      <data>${escXML(r.querySelector('.date').value)}</data>\n      <professor>${escXML(r.querySelector('.prof').value)}</professor>\n      <sala>${escXML(r.querySelector('.room').value)}</sala>\n      <observacoes>${escXML(r.querySelector('.notes')?.value||'')}</observacoes>\n      <conhecimentos>\n`;
   [...r.querySelectorAll('.placed')].forEach(x=>xml+=`        <conhecimento id="${escXML(x.dataset.id)}">${escXML(x.querySelector('span').textContent)}</conhecimento>\n`);
   xml+='      </conhecimentos>\n    </aula>\n'
  });xml+='  </aulas>\n</planejamento>\n';
@@ -239,11 +855,47 @@ function saveXML(){
 }
 function csvCell(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}
 function formatDateBR(v){if(!v)return '';const [y,m,d]=v.split('-');return (y&&m&&d)?`${d}/${m}/${y}`:v}
+function openReportMenu(){
+ const win=window.open('','_blank','width=760,height=620,scrollbars=yes,resizable=yes');
+ if(!win){alert('O navegador bloqueou a janela de Relatório. Permita pop-ups e tente novamente.');return}
+ const cancelled=[...document.querySelectorAll('.lesson')].filter(r=>r.querySelector('.cancelled')?.checked);
+ const cancelledRows=cancelled.map((r,i)=>`<tr><td>${i+1}</td><td>${formatDateBR(r.querySelector('.date').value)}</td><td>${r.querySelector('.lesson-uc').value}</td><td>${r.querySelector('.prof').value}</td><td>${r.querySelector('.room').value}</td></tr>`).join('');
+ win.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Relatórios</title>
+ <style>*{box-sizing:border-box}body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#172033}header{background:#17233f;color:#fff;padding:24px 5%}main{width:90%;margin:24px auto}.box{background:#fff;border:1px solid #dde3ec;border-radius:14px;padding:18px;margin-bottom:18px}button{background:#3157d5;color:#fff;border:0;border-radius:8px;padding:11px 15px;font-weight:bold;cursor:pointer;margin-right:8px}table{width:100%;border-collapse:collapse;margin-top:14px}th,td{padding:10px;border-bottom:1px solid #e3e7ed;text-align:left}th{background:#eef1f7}.empty{color:#7b8492}</style></head><body>
+ <header><h1 style="margin:0">Relatórios</h1></header><main>
+ <div class="box"><button onclick="window.opener.downloadReport()">Relatório geral CSV</button><button onclick="document.getElementById('canceladas').scrollIntoView()">Aulas canceladas</button><button onclick="window.close()">Voltar ao cronograma</button></div>
+ <div class="box" id="canceladas"><h2>Aulas canceladas</h2>
+ ${cancelled.length?`<table><thead><tr><th>#</th><th>Data</th><th>UC</th><th>Docente</th><th>Sala</th></tr></thead><tbody>${cancelledRows}</tbody></table>`:'<p class="empty">Nenhuma aula foi marcada como cancelada.</p>'}
+ </div></main></body></html>`);
+ win.document.close();
+}
+
 function downloadReport(){
  const rows=[...document.querySelectorAll('.lesson')]; let csv='Aula;Dia;UC;Docente;Sala\r\n';
  rows.forEach((r,i)=>{csv += [csvCell(i+1),csvCell(formatDateBR(r.querySelector('.date').value)),csvCell(r.querySelector('.lesson-uc').value),csvCell(r.querySelector('.prof').value),csvCell(r.querySelector('.room').value)].join(';')+'\r\n'});
  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}),a=document.createElement('a');
  a.href=URL.createObjectURL(blob);a.download='relatorio_planejamento.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+function showCancelledLessons(){
+  const cancelled=[...document.querySelectorAll('.lesson')].filter(r=>r.querySelector('.cancelled')?.checked);
+  const rows=cancelled.map((r,i)=>({
+    n:i+1,
+    date:formatDateBR(r.querySelector('.date')?.value||''),
+    uc:r.querySelector('.lesson-uc')?.value||'',
+    prof:r.querySelector('.prof')?.value||'',
+    room:r.querySelector('.room')?.value||''
+  }));
+  const w=window.open('','_blank','width=820,height=650,scrollbars=yes,resizable=yes');
+  if(!w){alert('O navegador bloqueou a janela. Permita pop-ups e tente novamente.');return;}
+  const body=rows.length
+    ? `<table><thead><tr><th>#</th><th>Data</th><th>UC</th><th>Docente</th><th>Sala</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${x.n}</td><td>${x.date}</td><td>${x.uc}</td><td>${x.prof}</td><td>${x.room}</td></tr>`).join('')}</tbody></table>`
+    : `<p class="empty">Nenhuma aula foi marcada como cancelada.</p>`;
+  w.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Aulas canceladas</title>
+  <style>*{box-sizing:border-box}body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#172033}header{background:#17233f;color:#fff;padding:24px 5%;display:flex;justify-content:space-between;align-items:center}main{width:90%;margin:24px auto;background:#fff;border:1px solid #dde3ec;border-radius:14px;padding:20px}button{background:#3157d5;color:#fff;border:0;border-radius:8px;padding:10px 14px;font-weight:bold;cursor:pointer}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid #e3e7ed;text-align:left}th{background:#eef1f7}.empty{color:#7b8492}</style></head><body>
+  <header><div><h1 style="margin:0">Aulas canceladas</h1><div style="opacity:.75;margin-top:5px">${rows.length} registro(s)</div></div><button onclick="window.opener.showCancelledLessons()">Aulas canceladas</button><button onclick="window.close()">Voltar</button></header>
+  <main>${body}</main></body></html>`);
+  w.document.close();
 }
 
 function analyzeHours(){
@@ -290,6 +942,8 @@ function analyzeHours(){
 
  const totalLessons=rows.length;
  const totalHours=totalLessons*hoursPerDay;
+ const totalRealized=rows.filter(r=>r.querySelector('.realized')?.checked).length;
+ const totalRealizedHours=totalRealized*hoursPerDay;
  win.document.open();
  win.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
  <title>Análise do Planejamento</title>
@@ -315,7 +969,7 @@ function analyzeHours(){
    <div class="card">Horas planejadas<b>${totalHours.toLocaleString('pt-BR',{maximumFractionDigits:2})} h</b></div>
    <div class="card">UCs com aulas<b>${Object.keys(counts).length}</b></div>
  </div>
- <table><thead><tr><th>UC</th><th>Unidade Curricular</th><th>Aulas</th><th>Horas planejadas</th><th>Carga da UC</th><th>Restante</th><th>Progresso</th></tr></thead>
+ <table><thead><tr><th>UC</th><th>Unidade Curricular</th><th>Planejadas</th><th>Realizadas</th><th>Horas planejadas</th><th>Carga realizada</th><th>Carga da UC</th><th>Restante</th><th>Progresso</th></tr></thead>
  <tbody>${rowsHtml}</tbody></table>
  </main></body></html>`);
  win.document.close();
@@ -326,9 +980,10 @@ function loadXMLText(text){
  lessons.innerHTML='';
  [...doc.querySelectorAll('aula')].forEach(a=>{
   const uc=a.getAttribute('uc')||'UC1';if(!UCS[uc])return;addLesson(uc);const r=lessons.lastElementChild;
-  r.querySelector('.date').value=a.querySelector('data')?.textContent||'';r.querySelector('.prof').value=a.querySelector('professor')?.textContent||'';r.querySelector('.room').value=a.querySelector('sala')?.textContent||'';
+   r.querySelector('.lesson-check').checked=a.getAttribute('selecionada')==='sim';r.querySelector('.realized').checked=a.getAttribute('realizada')==='sim';r.querySelector('.cancelled').checked=a.getAttribute('cancelada')==='sim';r.querySelector('.pending').checked=a.getAttribute('pendente')==='sim'; if(r.querySelector('.realized').checked){const b=r.querySelector('.realized-btn');b.style.background='#167b5b';b.style.color='#fff';b.title='Aula realizada';} if(r.querySelector('.cancelled').checked){const b=r.querySelector('.cancelled-btn');b.style.background='#c85b5b';b.style.color='#fff';b.title='Aula cancelada';} if(r.querySelector('.pending').checked){const b=r.querySelector('.pending-btn');b.style.background='#d59a35';b.style.color='#fff';b.title='Aula pendente';}
+  r.querySelector('.date').value=a.querySelector('data')?.textContent||'';r.querySelector('.prof').value=a.querySelector('professor')?.textContent||'';r.querySelector('.room').value=a.querySelector('sala')?.textContent||'';r.querySelector('.notes').value=a.querySelector('observacoes')?.textContent||'';
   [...a.querySelectorAll('conhecimento')].forEach(c=>{const inf=itemInfo(c.getAttribute('id'));if(inf)put(r.querySelector('.drop'),c.getAttribute('id'),c.textContent||inf.text)})
- });if(!lessons.children.length)addLesson();renumberLessons();renderUC()
+ });if(!lessons.children.length)addLesson();renumberLessons();checkDateConflicts();renderUC()
 }
 document.getElementById('xmlFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>loadXMLText(r.result);r.readAsText(f,'UTF-8');e.target.value=''});
 function ucColor(uc){
@@ -340,11 +995,53 @@ function selectUC(uc){
  activeUC=uc;
  document.querySelectorAll('.uc-btn').forEach(b=>b.classList.toggle('active',b.dataset.uc===uc));
  const ab=document.getElementById('addLessonBtn');
- if(ab){ab.textContent='+ Adicionar aula — '+uc;ab.style.background=ucColor(uc)}
+ if(ab){ab.disabled=false;ab.textContent='+ Adicionar aula — '+uc;ab.style.background=ucColor(uc)}
  document.querySelectorAll('.uc-btn').forEach(b=>{if(b.dataset.uc===uc&&uc!=='UC1'&&uc!=='UC2')b.style.background=ucColor(uc);else if(b.dataset.uc!==uc&&b.dataset.uc!=='UC1'&&b.dataset.uc!=='UC2')b.style.background='white'});
  renderUC();
 }
-renderUC();for(let i=0;i<3;i++)addLesson('UC1');
+
+function parseCourseXML(text){
+ const doc=new DOMParser().parseFromString(text,'application/xml');
+ if(doc.querySelector('parsererror')){alert('Não foi possível ler o XML de Curso.');return}
+ const loaded={};
+ [...doc.querySelectorAll('unidadesCurriculares > uc')].forEach(u=>{
+   const code=u.getAttribute('codigo');
+   if(!code)return;
+   const indicators=[...u.querySelectorAll(':scope > indicadores > indicador')].map(x=>x.textContent.trim());
+   const groups=[...u.querySelectorAll(':scope > grupos > grupo')].map(g=>[
+     g.getAttribute('nome')||'Conhecimentos',
+     [...g.querySelectorAll(':scope > conhecimento')].map(c=>[c.getAttribute('id')||'',c.textContent.trim()])
+   ]);
+   loaded[code]={title:u.getAttribute('titulo')||code,hours:Number(u.getAttribute('horas'))||0,indicators,groups};
+ });
+ if(!Object.keys(loaded).length){alert('Este XML não possui unidades curriculares válidas.');return}
+ UCS=loaded;
+ const courseName=doc.documentElement.getAttribute('nome')||'';
+ const courseTitle=document.getElementById('courseTitle');
+ if(courseTitle)courseTitle.value=courseName;
+ const order=Object.keys(UCS).sort((a,b)=>(parseInt(a.replace('UC',''))||0)-(parseInt(b.replace('UC',''))||0));
+ activeUC=order[0];
+ const buttons=document.getElementById('ucButtons');
+ buttons.innerHTML='';
+ order.forEach(uc=>{
+   const b=document.createElement('button');
+   b.type='button';b.className='uc-btn';b.dataset.uc=uc;b.textContent=uc;b.onclick=()=>selectUC(uc);
+   buttons.appendChild(b);
+ });
+ lessons.innerHTML='';
+ selectUC(activeUC);
+ alert('Curso carregado: '+(doc.documentElement.getAttribute('nome')||'XML de Curso')+' — '+order.length+' UCs.');
+}
+document.getElementById('courseXmlFile').addEventListener('change',e=>{
+ const f=e.target.files[0];if(!f)return;
+ const r=new FileReader();r.onload=()=>parseCourseXML(r.result);r.readAsText(f,'UTF-8');e.target.value='';
+});
+document.getElementById('ucTitle').textContent='Carregue um XML de Curso';
+document.getElementById('ucHours').textContent='O cronograma será configurado a partir da base XML.';
+document.getElementById('knowledgeBox').innerHTML='<div style="padding:18px;border:1px dashed #bcc4d6;border-radius:10px;color:#687089">Use o botão <b>Carregar XML de Curso</b> para iniciar.</div>';
+document.getElementById('count').textContent='0 de 0';
+document.getElementById('addLessonBtn').disabled=true;
+
 </script></body></html>
 <style>
 #ucButtons .uc-btn{
